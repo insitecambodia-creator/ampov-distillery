@@ -14,9 +14,9 @@ export const regions: { title: string; partners: Partner[] }[] = [
     partners: [
       { name: 'Maison Ferroni', type: 'e-shop', city: 'France', url: 'https://www.ferroni.shop/', logo: 'partners/maison-ferroni.webp' },
       { name: 'Excellence Rhum', type: 'e-shop', city: 'France', url: 'https://www.excellencerhum.com/en/1260_ampov-distillery', logo: 'partners/logo-excellence.png' },
-      { name: 'A La Croisée des Chemins', type: 'Restaurant', address: '1 Rte du Hohwald, 67140 Eichhoffen', city: 'France', url: 'https://www.a-la-croisee-des-chemins.fr/' },
+      { name: 'A La Croisée des Chemins', type: 'Restaurant', address: '1 Rte du Hohwald, 67140 Eichhoffen', city: 'France', url: 'https://www.a-la-croisee-des-chemins.fr/', logo: 'partners/croisee-des-chemins.webp' },
       { name: 'La Maison du Rhum Lyon', type: 'Caviste', address: '78 Rue de la Part-Dieu, 69003 Lyon', city: 'France', url: 'https://www.lamaisondesrhums.fr/', logo: 'partners/maison-du-rhum-lyon.jpg' },
-      { name: 'Les Garnements', type: 'Restaurant', address: '36a Rte de la Meinau, 67100 Strasbourg', city: 'France', url: 'https://www.les-garnements.fr/' },
+      { name: 'Les Garnements', type: 'Restaurant', address: '36a Rte de la Meinau, 67100 Strasbourg', city: 'France', url: 'https://www.les-garnements.fr/', logo: 'partners/les-garnements.webp' },
       { name: 'L’Arrangé des Alchimistes', type: 'Caviste', address: '1 B Quai des Anciens Abattoirs, 67120 Molsheim', city: 'France', url: 'https://www.lesalchimistes.eu/', logo: 'partners/alchimistes.jpg' },
     ],
   },

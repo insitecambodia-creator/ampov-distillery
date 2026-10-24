@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import RumCard from '../../components/RumCard.astro';
+import Pic from '../../components/Pic.astro';
 
 const all = (await getCollection('gamme')).sort((a, b) => a.data.order - b.data.order);
 const permanente = all.filter((r) => r.data.range === 'permanente');
@@ -21,6 +22,7 @@ const collection = all.filter((r) => r.data.range === 'collection');
         <h2>Une collection distillée avec maîtrise</h2>
         <p>Des blancs puissants aux cuvées vieillies sous climat tropical, chaque rhum Ampov exprime une facette du Cambodge. Nos cuvées sont pensées pour la dégustation, mais aussi pour la gastronomie et les <a href="/nos-creations/associations-mets-rhums-cocktails/">accords mets-rhums</a>.</p>
       </div>
+      <Pic path="gamme/creations-2.webp" alt="Cuvées Ampov Wild, édition limitée" />
     </div>
   </section>
   <section class="section alt">

@@ -13,6 +13,9 @@ interface Props {
 const { title, description = site.description, ogType = 'website' } = Astro.props;
 const fullTitle = Astro.url.pathname === '/' ? title : `${title} | ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Tant que PUBLIC_INDEXABLE n'est pas à « true » (mise en ligne), le site n'est pas indexé :
+// les URLs de préproduction (workers.dev, pages.dev) dupliqueraient l'ancien site WordPress.
+const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
 ---
 <!doctype html>
 <html lang="fr">
@@ -21,6 +24,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#14110e" />

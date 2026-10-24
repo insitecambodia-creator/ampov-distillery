@@ -59,6 +59,10 @@ Sortie 100 % statique (`dist/`), pas de PHP ni de base de données.
 
 Chaque branche non-production reçoit automatiquement une URL de prévisualisation `https://<branche>.<projet>.pages.dev`. `public/_headers` les marque `noindex`.
 
+### Mise en ligne : indexation
+
+Par défaut chaque page porte `<meta name="robots" content="noindex, nofollow">` (préproduction). **Au lancement**, définir la variable de build `PUBLIC_INDEXABLE=true` dans Cloudflare (Settings → Variables) et redéployer ; sinon le site restera invisible pour Google.
+
 ## E-commerce (plus tard)
 
 Le schéma produit (`src/content.config.ts`) porte déjà `sku`, `priceEur`, `volumeCl`, `abv`. Pistes, de la plus simple à la plus lourde :

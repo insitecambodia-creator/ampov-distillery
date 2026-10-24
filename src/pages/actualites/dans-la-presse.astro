@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Pic from '../../components/Pic.astro';
 const presse = [
   { name: 'Easy Cambodia', url: 'https://easy-cambodia.com/en/places/ampov-distillery/' },
   { name: 'Tripadvisor', url: 'https://www.tripadvisor.com/Attraction_Review-g293940-d27799222-Reviews-Ampov_Distillery-Phnom_Penh.html' },
@@ -28,6 +29,7 @@ const presse = [
     <div class="wrap prose">
       <h1>Dans la presse</h1>
       <p class="lead">Cliquez sur le nom pour voir l’article.</p>
+      <Pic path="presse/danslapresse.webp" alt="" />
       <ul class="ticks">
         {presse.map((p) => <li>{p.url ? <a href={p.url} rel="noopener" target="_blank">{p.name}</a> : p.name}</li>)}
       </ul>
