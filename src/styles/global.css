@@ -51,3 +51,33 @@ p { margin: 0 0 1em; }
 .skip { position: absolute; left: -999px; top: 0; background: var(--accent); color: var(--accent-fg); padding: .5rem 1rem; z-index: 10; }
 .skip:focus { left: 0; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* ---- Pages ---- */
+.hero { position: relative; isolation: isolate; padding-block: clamp(5rem, 14vw, 10rem); background: radial-gradient(ellipse at 70% 0%, #2c2217 0%, var(--bg) 60%); overflow: hidden; }
+.hero > picture, .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero:has(> img)::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(20,17,14,.88), rgba(20,17,14,.35)); }
+.page-title { padding-block: clamp(2.5rem, 7vw, 5rem) 1rem; }
+.split { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); align-items: center; }
+.split img { width: 100%; height: auto; }
+.cols-3 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.tile { border: 1px solid var(--line); padding: 1.25rem; background: var(--bg-alt); }
+.tile h3 { color: var(--accent); margin-bottom: .35rem; }
+.tile p { margin: 0; color: var(--muted); }
+.ticks { list-style: none; padding: 0; }
+.ticks li { padding-left: 1.5rem; position: relative; margin-bottom: .6rem; }
+.ticks li::before { content: '◆'; position: absolute; left: 0; color: var(--accent); font-size: .7rem; top: .45rem; }
+.chip { display: inline-block; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--line); padding: .15rem .6rem; }
+.card .img, .card img { aspect-ratio: 3/4; object-fit: cover; width: 100%; }
+.card .ph { aspect-ratio: 3/4; }
+.subnav { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 0 0 2rem; padding: 0; list-style: none; }
+.video { aspect-ratio: 16/9; width: 100%; border: 0; background: var(--bg-alt); }
+.cols-2 { columns: 2 18rem; column-gap: 3rem; }
+form.stack { display: grid; gap: 1rem; max-width: 34rem; }
+form.stack label { display: grid; gap: .3rem; font-size: .95rem; color: var(--muted); }
+form.stack input, form.stack select, form.stack textarea { font: inherit; padding: .65rem .8rem; background: var(--bg-alt); color: var(--fg); border: 1px solid var(--line); }
+form.stack input[type=range] { padding: 0; accent-color: var(--accent); }
+form.stack .row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
+.hp { position: absolute; left: -9999px; }
+.status { color: var(--accent); }
+.prose h2 { margin-top: 2rem; }
+.prose h3 { margin-top: 1.5rem; }

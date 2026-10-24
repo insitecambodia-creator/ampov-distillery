@@ -1,35 +1,47 @@
 ---
-import { nav, site } from '../data/site';
+import { footerNav, site } from '../data/site';
+const { social, address } = site;
 const year = new Date().getFullYear();
-const { social } = site;
 ---
+<section class="visit">
+  <div class="wrap">
+    <h2>Venez visiter la distillerie lors de votre prochain séjour à Phnom Penh</h2>
+    <p><a class="btn" href="/contact/visiter-la-distillerie/">Cliquez ici</a></p>
+  </div>
+</section>
 <footer class="ftr">
   <div class="wrap cols">
     <div>
       <p class="name">{site.name}</p>
+      <p class="muted">{address.street}, {address.city} {address.postalCode}, {address.country}</p>
       <p class="muted"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p class="social">
+        <a href={social.facebook} rel="noopener">Facebook</a>
+        <a href={social.instagram} rel="noopener">Instagram</a>
+        <a href={social.youtube} rel="noopener">YouTube</a>
+      </p>
     </div>
     <nav aria-label="Pied de page">
-      <ul>
-        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
-        <li><a href="/mentions-legales/">Mentions légales</a></li>
-        {social.instagram && <li><a href={social.instagram} rel="noopener">Instagram</a></li>}
-        {social.facebook && <li><a href={social.facebook} rel="noopener">Facebook</a></li>}
-      </ul>
+      <ul>{footerNav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
     </nav>
   </div>
   <div class="wrap legal">
-    <p><strong>L’abus d’alcool est dangereux pour la santé. À consommer avec modération.</strong></p>
-    <p class="muted">© {year} {site.name}. Tous droits réservés.</p>
+    <p><strong>{site.healthWarning}</strong></p>
+    <p class="muted">© {year} {site.legalName}</p>
   </div>
 </footer>
 <style>
-  .ftr { border-top: 1px solid var(--line); background: var(--bg-alt); padding-block: 2.5rem 1.5rem; font-size: .95rem; }
+  .visit { background: var(--accent); color: var(--accent-fg); padding-block: 3rem; text-align: center; }
+  .visit h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); max-width: 40rem; margin-inline: auto; }
+  .visit .btn { background: var(--accent-fg); color: var(--accent); border-color: var(--accent-fg); }
+  .visit .btn:hover { background: transparent; color: var(--accent-fg); }
+  .ftr { background: var(--bg-alt); padding-block: 2.5rem 1.5rem; font-size: .95rem; }
   .cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
-  .name { font: 600 1.15rem var(--serif); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .25rem; }
+  .name { font: 600 1.15rem var(--serif); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 .5rem; }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
   a { color: var(--muted); } a:hover { color: var(--accent); }
-  .muted { color: var(--muted); margin: 0; }
+  .muted { color: var(--muted); margin: 0 0 .25rem; }
+  .social { display: flex; gap: 1.25rem; margin: .75rem 0 0; }
   .legal { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
   .legal p { margin: 0 0 .35rem; }
 </style>

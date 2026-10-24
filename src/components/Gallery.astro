@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+import { imgs } from '../data/images';
+
+// Grille d'images ; les fichiers absents sont ignorés, et rien n'est rendu si aucun n'existe.
+interface Props { paths: string[]; alt?: string; min?: string }
+const { paths, alt = '', min = '14rem' } = Astro.props;
+const items = imgs(paths);
+---
+{items.length > 0 && (
+  <div class="gallery" style={`--min:${min}`}>
+    {items.map((i) => <Image src={i.src} alt={alt} widths={[320, 480, 800]} sizes="(min-width: 60rem) 22rem, 50vw" loading="lazy" />)}
+  </div>
+)}
+<style>
+  .gallery { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr)); margin-block: 1.5rem; }
+  .gallery :global(img) { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+</style>

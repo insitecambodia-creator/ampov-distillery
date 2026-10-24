@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import Gallery from '../../components/Gallery.astro';
+const menu = [
+  { t: 'Entrées', items: [
+    ['Carpaccio de Saint-Jacques, citron caviar & huile de combava', 'Ampov Blanc'],
+    ['Carpaccio de Saint-Jacques, agrumes & huile d’olive', 'Ampov Kampra'],
+    ['Ceviche de bar, marinade au citron, main de bouddha et gingembre', 'Ampov Blanc'],
+    ['Foie gras poêlé, pain brioché, épices douces', 'Ampov VO Route d’Angkor'],
+    ['Tataki de bœuf, sésame, réduction soja', 'Ampov VO Barrique Sauvage'],
+    ['Homard bleu rôti, beurre au curry jaune & émulsion coco-citronnelle', 'Ampov Blanc « Fraîcheur de canne »'],
+    ['Huître fine de claire, gel de citron caviar, huile de combava', 'Ampov Blanc 42° (1 cl)'],
+    ['« Végétal & Floral » : asperges blanches, crème légère au lait de coco, pickles de mangue verte', 'Ampov Blanc en highball gastronomique'],
+  ]},
+  { t: 'Plats', items: [
+    ['« Épices & Intensité » : homard bleu rôti, beurre au curry jaune, émulsion citronnelle', 'Ampov Blanc'],
+    ['« Bois, Caramel & Profondeur » : filet de canard laqué, jus réduit au cacao & purée de patate douce fumée', 'Ampov Ex Cognac Cask'],
+    ['Risotto crémeux mangue & gambas grillées', 'Ampov Kampra'],
+    ['Magret de canard laqué miel & épices, patate douce', 'Ampov VO Route d’Angkor'],
+    ['Côte de bœuf maturée, jus réduit, légumes racines', 'Ampov VO Barrique Sauvage'],
+  ]},
+  { t: 'Fromages', items: [
+    ['« Fermentation & Umami » : fromage de chèvre affiné, miel sauvage & condiment miso-citron', 'Ampov Wild'],
+    ['Tome au foin en 2 façons', 'Ampov Ex Cognac Cask'],
+    ['Brie rôti (ou Brillat-Savarin ou bleu crémeux), figues rôties & réduction Ampov ex-Porto', 'Ampov Ex Porto Cask'],
+  ]},
+  { t: 'Desserts', items: [
+    ['Ananas rôti (ou mangue rôtie + passion), crémeux coco & glace au rhum « Route d’Angkor »', 'Ampov VO Route d’Angkor, ou léger « spray » sur l’ananas en sortie'],
+    ['« Bois & Cacao » : sphère chocolat 70 %, cœur passion & praliné amande', 'Ampov Ex Cognac Cask ou Ex Porto Cask'],
+  ]},
+];
+---
+<Base title="Associations Mets-Rhums & Cocktails" description="Nos cuvées expriment un terroir inédit dans l’univers gastronomique : accords mets-rhums et cocktails signature Ampov.">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Associations Mets-Rhums & Cocktails</h1>
+      <h2>Associations mets-rhums (pairing)</h2>
+      <p>Nos cuvées expriment un terroir encore totalement inédit dans l’univers gastronomique : variété de canne locale, fermentations longues, distillations particulières et travail artisanal avec une véritable histoire humaine. Nous développons des profils aromatiques rares, pensés pour les accords mets-rhums, la cuisine et la haute gastronomie : une pureté aromatique, une fraîcheur végétale et une texture nette. Une gamme complète tournée vers la gastronomie.</p>
+      <p><strong>Ampov est créateur d’émotions.</strong></p>
+      <Gallery paths={['accords/AMPOV-06190.jpg', 'accords/AMPOV-06347.jpg', 'accords/AMPOV-06680.jpg', 'accords/AMPOV-06601.jpg', 'accords/AMPOV-06526.jpg']} alt="Accords mets et rhums Ampov" />
+      {menu.map((c) => (
+        <>
+          <h3>{c.t}</h3>
+          <ul class="ticks">{c.items.map(([plat, rhum]) => <li>{plat} — <strong>{rhum}</strong></li>)}</ul>
+        </>
+      ))}
+      <h2>Cocktails signature Ampov</h2>
+      <Gallery paths={['accords/blankcocltail.webp', 'accords/decontruit.webp', 'accords/mangue.webp']} alt="Cocktail signature Ampov" />
+    </div>
+  </section>
+</Base>

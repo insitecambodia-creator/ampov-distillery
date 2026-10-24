@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+const presse = [
+  { name: 'Easy Cambodia', url: 'https://easy-cambodia.com/en/places/ampov-distillery/' },
+  { name: 'Tripadvisor', url: 'https://www.tripadvisor.com/Attraction_Review-g293940-d27799222-Reviews-Ampov_Distillery-Phnom_Penh.html' },
+  { name: 'Excellence Rhum', url: 'https://www.excellencerhum.com/en/1260_ampov-distillery' },
+  { name: 'The Rum Geography', url: 'https://rumgeography.com/producers/ampov-distillery/' },
+  { name: 'The Rumporter — Ampov étoffe sa gamme Collection', url: 'https://rumporter.com/ampov-etoffe-sa-gamme-collection/' },
+  { name: 'The Rumporter — La maison Ampov enrichit sa Collection', url: 'https://rumporter.com/la-maison-ampov-enrichit-sa-collection/' },
+  { name: 'The Rumporter — Ampov, Cambodge', url: 'https://rumporter.com/ampov-cambodge/' },
+  { name: 'Gault & Millau', url: 'https://fr.gaultmillau.com/fr/bottles/rhum-ampov-ex-cognac-cask' },
+  { name: 'Rhum Attitude' },
+  { name: 'Rum Lab' },
+  { name: 'The Wine Merchants' },
+  { name: 'Kabas Concept' },
+  { name: 'La Maison des Rhums' },
+  { name: 'Le Blog à Roger', url: 'https://leblogaroger.eu/?s=ampov' },
+  { name: 'Préférence Rhum', url: 'https://preference-rhum.fr/premier-arret-en-asie-ampov/' },
+  { name: 'Quebec Rhum', url: 'https://quebecrhum.com/2025/08/evaluation-ampov-rhum-blanc-55/' },
+  { name: 'Les Rhums de l’homme à la poussette', url: 'https://lesrhumsdelhommealapoussette.com/2024/02/25/ampov-le-rhum-made-in-cambodge/' },
+  { name: 'Rhum Concept', url: 'https://rhum-concept.com/2026/01/31/decouvrez-le-rhum-dexception-du-cambodge/' },
+  { name: 'Bordeaux Rhum Festival', url: 'https://www.bordeauxrhumfestival.com/post/ampov-cambodge-bordeaux-rhum-festival-2026' },
+  { name: 'Caveman', url: 'https://caveman.city/?s=ampov' },
+];
+---
+<Base title="Dans la presse" description="Ampov dans la presse et sur les sites spécialisés rhum.">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Dans la presse</h1>
+      <p class="lead">Cliquez sur le nom pour voir l’article.</p>
+      <ul class="ticks">
+        {presse.map((p) => <li>{p.url ? <a href={p.url} rel="noopener" target="_blank">{p.name}</a> : p.name}</li>)}
+      </ul>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,42 @@
+---
+import { site } from '../data/site';
+---
+{/* Contrôle d'âge 18+ (équivalent du popup Elementor). Enfant de <body>, affiché
+    uniquement si JavaScript est actif et que l'âge n'a pas encore été confirmé ;
+    les robots d'indexation ne le voient pas. */}
+<dialog id="age-gate" aria-labelledby="age-title">
+  <p class="eyebrow">{site.name}</p>
+  <h2 id="age-title">Avez-vous plus de 18 ans ?</h2>
+  <p class="msg" id="age-msg" hidden>L’accès à ce site est réservé aux personnes majeures.</p>
+  <p class="actions">
+    <button type="button" class="btn" id="age-yes">Oui</button>
+    <button type="button" class="btn ghost" id="age-no">Non</button>
+  </p>
+  <p class="warn">{site.healthWarning}</p>
+</dialog>
+<script is:inline>
+  (function () {
+    var KEY = 'ampov-age-ok';
+    try { if (localStorage.getItem(KEY) === '1') return; } catch (e) {}
+    if (/bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent)) return;
+    var d = document.getElementById('age-gate');
+    if (!d || !d.showModal) return;
+    d.addEventListener('cancel', function (e) { e.preventDefault(); });
+    document.getElementById('age-yes').addEventListener('click', function () {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      d.close();
+    });
+    document.getElementById('age-no').addEventListener('click', function () {
+      document.getElementById('age-msg').hidden = false;
+    });
+    d.showModal();
+  })();
+</script>
+<style>
+  dialog { border: 1px solid var(--line); background: var(--bg-alt); color: var(--fg); padding: 2rem; max-width: 26rem; width: calc(100% - 2rem); text-align: center; }
+  dialog::backdrop { background: rgba(10, 8, 6, .92); }
+  .actions { display: flex; gap: .75rem; justify-content: center; margin: 1.5rem 0; }
+  .msg { color: var(--accent); }
+  .warn { color: var(--muted); font-size: .85rem; margin: 0; }
+  h2 { margin-bottom: .75rem; }
+</style>

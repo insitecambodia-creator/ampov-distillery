@@ -1,11 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import { nav, site } from '../data/site';
+import { img } from '../data/images';
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const logo = img('brand/logo.webp');
 ---
 <header class="hdr">
   <div class="wrap bar">
-    <a class="brand" href="/">{site.name}</a>
+    <a class="brand" href="/" aria-label={`${site.name} — accueil`}>
+      {logo ? <Image src={logo} alt={site.name} height={48} widths={[96, 192]} sizes="auto" loading="eager" /> : 'Ampov'}
+    </a>
     <nav aria-label="Navigation principale">
       <ul>
         {nav.map((n) => (
@@ -18,7 +23,8 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 <style>
   .hdr { border-bottom: 1px solid var(--line); }
   .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 2rem; padding-block: 1rem; }
-  .brand { font: 600 1.35rem var(--serif); letter-spacing: .08em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+  .brand { font: 600 1.6rem var(--serif); letter-spacing: .3em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+  .brand :global(img) { height: 3rem; width: auto; }
   ul { display: flex; flex-wrap: wrap; gap: .25rem 1.75rem; list-style: none; margin: 0; padding: 0; }
   nav a { color: var(--muted); text-decoration: none; padding-block: .35rem; border-bottom: 2px solid transparent; }
   nav a:hover, nav a[aria-current] { color: var(--fg); border-bottom-color: var(--accent); }

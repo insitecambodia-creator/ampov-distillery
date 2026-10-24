@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+const { address, social } = site;
+---
+<Base title="Contact" description="Contactez la Distillerie Ampov à Phnom Penh : e-mail, adresse, visites.">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Contact</h1>
+      <p>Une question, une demande de distribution ou d’importation, une visite ? Écrivez-nous.</p>
+      <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <address>
+        <strong>{site.legalName}</strong><br />
+        {address.street}, {address.city} {address.postalCode}<br />
+        {address.country}
+      </address>
+      <p><a class="btn" href="/contact/visiter-la-distillerie/">Visiter la distillerie</a></p>
+      <p>
+        <a href={social.facebook} rel="noopener">Facebook</a> ·
+        <a href={social.instagram} rel="noopener">Instagram</a> ·
+        <a href={social.youtube} rel="noopener">YouTube</a>
+      </p>
+    </div>
+  </section>
+</Base>
