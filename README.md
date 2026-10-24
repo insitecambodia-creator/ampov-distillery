@@ -57,6 +57,8 @@ Sortie 100 % statique (`dist/`), pas de PHP ni de base de données.
 | Production branch | `main` |
 | Variable `NODE_VERSION` | `22.23.4` (Astro 7 exige Node ≥ 22.23.4) |
 
+`wrangler.jsonc` déclare un Worker « assets seuls » qui sert `dist/` tel quel (le nom `ampov-distillery` doit rester identique à celui du Worker dans Cloudflare). Sans ce fichier, Cloudflare génère à chaque build un adaptateur serveur + KV + Images dont le site n'a pas besoin.
+
 Chaque branche non-production reçoit automatiquement une URL de prévisualisation `https://<branche>.<projet>.pages.dev`. `public/_headers` les marque `noindex`.
 
 ### Mise en ligne : indexation
