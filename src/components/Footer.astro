@@ -1,0 +1,35 @@
+---
+import { nav, site } from '../data/site';
+const year = new Date().getFullYear();
+const { social } = site;
+---
+<footer class="ftr">
+  <div class="wrap cols">
+    <div>
+      <p class="name">{site.name}</p>
+      <p class="muted"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+    <nav aria-label="Pied de page">
+      <ul>
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+        {social.instagram && <li><a href={social.instagram} rel="noopener">Instagram</a></li>}
+        {social.facebook && <li><a href={social.facebook} rel="noopener">Facebook</a></li>}
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap legal">
+    <p><strong>L’abus d’alcool est dangereux pour la santé. À consommer avec modération.</strong></p>
+    <p class="muted">© {year} {site.name}. Tous droits réservés.</p>
+  </div>
+</footer>
+<style>
+  .ftr { border-top: 1px solid var(--line); background: var(--bg-alt); padding-block: 2.5rem 1.5rem; font-size: .95rem; }
+  .cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
+  .name { font: 600 1.15rem var(--serif); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .25rem; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+  a { color: var(--muted); } a:hover { color: var(--accent); }
+  .muted { color: var(--muted); margin: 0; }
+  .legal { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  .legal p { margin: 0 0 .35rem; }
+</style>

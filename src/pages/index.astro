@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { site } from '../data/site';
+
+const produits = (await getCollection('produits')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+---
+<Base title="Accueil">
+  <section class="section hero">
+    <div class="wrap">
+      <p class="eyebrow">Distillerie artisanale</p>
+      <h1>{site.name}</h1>
+      <p class="lead">
+        <!-- TODO: texte d'accroche issu du site actuel -->
+        Des spiritueux élaborés avec exigence, du choix des matières premières à la mise en bouteille.
+      </p>
+      <p><a class="btn" href="/produits/">Découvrir nos produits</a> <a class="btn ghost" href="/la-distillerie/">Notre histoire</a></p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>Nos créations</h2>
+      <div class="grid">{produits.map((p) => <ProductCard product={p} />)}</div>
+      <p style="margin-top:2rem"><a href="/produits/">Voir toute la gamme →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Le savoir-faire</h2>
+      <p>
+        <!-- TODO: reprendre le texte de présentation du site actuel -->
+        Présentez ici en quelques lignes l’esprit de la distillerie, ses méthodes et ses valeurs.
+      </p>
+      <p><a href="/la-distillerie/">En savoir plus →</a></p>
+    </div>
+  </section>
+</Base>
+<style>
+  .hero { padding-block: clamp(4rem, 12vw, 9rem); background: radial-gradient(ellipse at 70% 0%, #2c2217 0%, var(--bg) 60%); }
+</style>
