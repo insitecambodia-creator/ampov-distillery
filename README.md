@@ -45,9 +45,19 @@ Fenêtre « Avez-vous plus de 18 ans ? » (`src/components/AgeGate.astro`), mém
 
 Le HTML et les images de l'ancien site sont dans `source-content/` (non publié) ; ce dossier peut être supprimé une fois la migration terminée.
 
-## Déploiement
+## Déploiement (Cloudflare Pages)
 
-Sortie 100 % statique (`dist/`) : Cloudflare Pages, Netlify ou Vercel (offres gratuites suffisantes), ou même le serveur Cloudways existant derrière Nginx. Pas de PHP, pas de base de données.
+Sortie 100 % statique (`dist/`), pas de PHP ni de base de données.
+
+| Réglage Cloudflare Pages | Valeur |
+| --- | --- |
+| Framework preset | Astro |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Production branch | `main` |
+| Variable `NODE_VERSION` | `22.23.4` (Astro 7 exige Node ≥ 22.23.4) |
+
+Chaque branche non-production reçoit automatiquement une URL de prévisualisation `https://<branche>.<projet>.pages.dev`. `public/_headers` les marque `noindex`.
 
 ## E-commerce (plus tard)
 
