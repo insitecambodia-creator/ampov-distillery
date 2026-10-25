@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import Gallery from '../../components/Gallery.astro';
+import { site } from '../../data/site';
+
+// Endpoint du formulaire (Formspree, Web3Forms, Getform…) : voir .env.example.
+// Sans endpoint, le formulaire ouvre le client mail du visiteur (mailto).
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+---
+<Base title="Visiter la distillerie" description="À Phnom Penh : visite guidée de la distillerie Ampov, 5 $ par personne (déduit si achat de rhums), sur réservation uniquement.">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Visiter la distillerie</h1>
+      <p class="lead">À Phnom Penh : visite guidée — 5 $ par personne (déduit si achat de rhums) — sur réservation uniquement pour garantir une expérience immersive et personnalisée — 1 h.</p>
+      <p>La visite incontournable pour tout savoir sur l’élaboration des produits de la Distillerie Ampov. Visite des chais, des alambics et dégustation d’une sélection.</p>
+      <p><strong>Adresse :</strong> {site.address.visit}</p>
+
+      <h2>Demande de visite</h2>
+      <form class="stack" id="visit-form" method="post" action={endpoint || undefined} data-email={site.email}>
+        <div class="row">
+          <label>Prénom *<input name="prenom" required autocomplete="given-name" /></label>
+          <label>Nom *<input name="nom" required autocomplete="family-name" /></label>
+        </div>
+        <label>Email *<input type="email" name="email" required autocomplete="email" /></label>
+        <label>Téléphone / Telegram<input type="tel" name="telephone" autocomplete="tel" /></label>
+        <label>Nombre de personnes : <output id="pax-out">4</output>
+          <input type="range" name="personnes" min="2" max="10" step="1" value="4" id="pax" />
+        </label>
+        <div class="row">
+          <label>Date<input type="date" name="date" required /></label>
+          <label>Heure (9 h – 18 h)<input type="time" name="heure" min="09:00" max="18:00" step="900" required /></label>
+        </div>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <p><button class="btn" type="submit">Envoyer la demande</button></p>
+        <p class="status" id="visit-status" role="status"></p>
+      </form>
+
+      <h3>Quelques-unes de nos dernières visites</h3>
+    </div>
+    <div class="wrap">
+      <Gallery paths={['visite/visitdistillerie.webp', 'visite/visite-1.webp', 'visite/visite-2.webp', 'visite/visite-3.webp']} alt="Visite de la distillerie Ampov" min="18rem" />
+    </div>
+  </section>
+</Base>
+<script>
+  const form = document.getElementById('visit-form') as HTMLFormElement;
+  const pax = document.getElementById('pax') as HTMLInputElement;
+  const out = document.getElementById('pax-out')!;
+  const status = document.getElementById('visit-status')!;
+  pax.addEventListener('input', () => (out.textContent = pax.value));
+
+  form.addEventListener('submit', async (e) => {
+    const data = new FormData(form);
+    if (data.get('website')) { e.preventDefault(); return; } // honeypot
+    if (!form.getAttribute('action')) {
+      // Pas d'endpoint configuré : repli sur le client mail.
+      e.preventDefault();
+      const body = [...data.entries()].filter(([k]) => k !== 'website').map(([k, v]) => `${k} : ${v}`).join('\n');
+      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent('Demande de visite')}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+    e.preventDefault();
+    status.textContent = 'Envoi en cours…';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      status.textContent = 'Merci ! Votre demande a bien été envoyée, nous revenons vers vous rapidement.';
+    } catch {
+      status.textContent = `L’envoi a échoué. Écrivez-nous à ${form.dataset.email}.`;
+    }
+  });
+</script>

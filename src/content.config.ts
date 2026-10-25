@@ -2,24 +2,36 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// Products live as Markdown files. The schema already carries the fields a shop
-// needs (sku, price, volume, abv) so e-commerce can be layered on without a
-// content migration.
-const produits = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/produits' }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      category: z.string(), // ex. Rhum, Gin, Liqueur
-      summary: z.string().max(200),
-      image: image().optional(),
-      imageAlt: z.string().optional(),
-      abv: z.number().optional(), // % vol.
-      volumeCl: z.number().optional(),
-      sku: z.string().optional(),
-      priceEur: z.number().optional(), // TTC — non affiché tant que la boutique n'existe pas
-      order: z.number().default(100),
-    }),
+// Un fichier Markdown par rhum. L'URL publique reste /gamme/<id>/ comme sur
+// WordPress. Les champs sku / priceEur / volumeCl / abv sont prêts pour la
+// future boutique. `image` est un chemin sous src/assets/ (résolu à l'affichage,
+// donc un fichier absent n'empêche pas le build).
+const gamme = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/gamme' }),
+  schema: z.object({
+    name: z.string(),
+    range: z.enum(['permanente', 'collection']),
+    type: z.string(), // Blanc, Ambré, Blend…
+    image: z.string().optional(),
+    summary: z.string().optional(),
+    abv: z.number().optional(),
+    volumeCl: z.number().optional(),
+    sku: z.string().optional(),
+    priceEur: z.number().optional(),
+    order: z.number().default(100),
+  }),
 });
 
-export const collections = { produits };
+// Actualités. Tant que le corps Markdown est vide, seule la carte du listing
+// est affichée (pas de page article).
+const actualites = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/actualites' }),
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    image: z.string().optional(),
+    order: z.number().default(100),
+  }),
+});
+
+export const collections = { gamme, actualites };

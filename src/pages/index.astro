@@ -1,43 +1,95 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import ProductCard from '../components/ProductCard.astro';
+import Pic from '../components/Pic.astro';
+import { Image } from 'astro:assets';
+import { img } from '../data/images';
 import { site } from '../data/site';
 
-const produits = (await getCollection('produits')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const hero = img('home/home-page-1.webp');
+const rhums = [
+  { t: 'Blancs', d: 'Pur jus : expressifs, floraux, intenses' },
+  { t: 'Wild', d: 'Pur jus : fermentation spontanée, profil sauvage' },
+  { t: 'Ambrés', d: 'Rondeur, profondeur, vieillissement tropical' },
+  { t: 'Blend', d: 'Assemblages rares de pur jus et de mélasse : élégant & gourmand' },
+  { t: 'Vieux', d: 'Invitation au voyage : toujours en Single Cask' },
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.legalName,
+  alternateName: site.name,
+  url: site.url,
+  email: site.email,
+  sameAs: Object.values(site.social),
+  address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, postalCode: site.address.postalCode, addressCountry: 'KH' },
+};
 ---
-<Base title="Accueil">
-  <section class="section hero">
+<Base title="La Distillerie Ampov au Cambodge | Rhum artisanal premium" description="L’expression la plus créative du rhum artisanal cambodgien. Premier rhum de pur jus de canne cambodgien.">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="hero">
+    {hero && <Image src={hero} alt="" widths={[800, 1280, 1920]} sizes="100vw" loading="eager" fetchpriority="high" />}
     <div class="wrap">
-      <p class="eyebrow">Distillerie artisanale</p>
-      <h1>{site.name}</h1>
-      <p class="lead">
-        <!-- TODO: texte d'accroche issu du site actuel -->
-        Des spiritueux élaborés avec exigence, du choix des matières premières à la mise en bouteille.
-      </p>
-      <p><a class="btn" href="/produits/">Découvrir nos produits</a> <a class="btn ghost" href="/la-distillerie/">Notre histoire</a></p>
+      <p class="eyebrow">Distillerie artisanale · Phnom Penh</p>
+      <h1>Rhum Ampov</h1>
+      <p class="lead" style="color:var(--fg)"><strong>Premier rhum de pur jus de canne cambodgien</strong><br />L’expression la plus créative du rhum artisanal cambodgien</p>
+      <p><a class="btn" href="/nos-creations/">Découvrir la gamme</a></p>
     </div>
   </section>
 
   <section class="section alt">
-    <div class="wrap">
-      <h2>Nos créations</h2>
-      <div class="grid">{produits.map((p) => <ProductCard product={p} />)}</div>
-      <p style="margin-top:2rem"><a href="/produits/">Voir toute la gamme →</a></p>
+    <div class="wrap split">
+      <div class="prose">
+        <p class="eyebrow">Rhum premium de pur jus cambodgien</p>
+        <h2>L’artisanat d’exception, distillé avec précision</h2>
+        <p>Distillation artisanale en alambics cuivre, fermentation longue, terroir unique. Chaque bouteille Ampov raconte une histoire vraie, façonnée avec exigence, transparence et passion.</p>
+        <p><a class="btn" href="/nos-creations/">Découvrir la gamme →</a></p>
+      </div>
+      <Pic path="home/alambic-cuivre.webp" alt="Alambic en cuivre de la distillerie Ampov" />
     </div>
   </section>
 
   <section class="section">
     <div class="wrap prose">
-      <h2>Le savoir-faire</h2>
-      <p>
-        <!-- TODO: reprendre le texte de présentation du site actuel -->
-        Présentez ici en quelques lignes l’esprit de la distillerie, ses méthodes et ses valeurs.
-      </p>
-      <p><a href="/la-distillerie/">En savoir plus →</a></p>
+      <p class="eyebrow">Un rhum né du terroir cambodgien</p>
+      <h2>Ampov est un rhum qui raconte une terre, un climat, une culture.</h2>
+      <p>Au cœur des plaines du Cambodge, la canne à sucre pousse sous un climat tropical idéal, nourrie par des sols riches et récoltée à la main par de petits producteurs passionnés. Un pur jus, naturel, sans additif, qui exprime toute la richesse aromatique d’une terre unique.</p>
+      <p><a href="/terroir-canne/">Découvrir le terroir Ampov →</a></p>
+      <h2>Un savoir-faire franco-cambodgien</h2>
+      <p>La distillation est réalisée sur deux alambics « pot still » en cuivre importés d’Alsace : Holstein et Gillain. Fermentation longue, double distillation, sélection minutieuse des cœurs… Chaque étape est pensée pour créer un rhum d’une grande précision aromatique, rare en Asie du Sud-Est. Formé en Lorraine et à Cognac, Ralph a choisi d’unir technique française et matière première cambodgienne.</p>
+      <p><a href="/savoir-faire/">Découvrir le savoir-faire →</a></p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>Nos rhums</h2>
+      <div class="cols-3">
+        {rhums.map((r) => <div class="tile"><h3>{r.t}</h3><p>{r.d}</p></div>)}
+      </div>
+      <p style="margin-top:2rem"><a href="/nos-creations/">Découvrir toute la gamme →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Une philosophie fondée sur l’authenticité</h2>
+      <p>Dès sa création, Ampov s’inscrit dans une démarche authentique et responsable :</p>
+      <ul class="ticks">
+        <li>Approvisionnement en canne à sucre auprès de petits producteurs locaux, dans le respect de ces derniers : une rémunération juste pour une collaboration durable.</li>
+        <li>Culture avec peu ou pas de pesticides de synthèse, pas de brûlis, récolte à la main.</li>
+        <li>Transformation rapide après récolte pour préserver toute la fraîcheur du jus.</li>
+        <li>Production entièrement artisanale, du pressage à la mise en bouteille, avec une transparence totale : aucun additif, colorant ou sucre ajouté.</li>
+      </ul>
+      <p>Chaque étape est pensée pour respecter à la fois le produit, le terroir et les hommes qui en vivent.</p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap prose">
+      <h2>Où déguster Ampov</h2>
+      <p>Présent dans les plus beaux hôtels, restaurants et bars du Cambodge, mais également chez des cavistes spécialisés ou des restaurants en France et en Europe. Ampov est également présent au Japon.</p>
+      <p><a class="btn" href="/ou-nous-trouver/">Trouver où acheter Ampov</a></p>
     </div>
   </section>
 </Base>
-<style>
-  .hero { padding-block: clamp(4rem, 12vw, 9rem); background: radial-gradient(ellipse at 70% 0%, #2c2217 0%, var(--bg) 60%); }
-</style>

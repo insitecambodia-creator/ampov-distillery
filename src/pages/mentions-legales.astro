@@ -1,12 +1,55 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
 ---
 <Base title="Mentions légales" description="Mentions légales du site ampov-distillery.com.">
   <section class="section">
     <div class="wrap prose">
       <h1>Mentions légales</h1>
-      <p>TODO : raison sociale, forme juridique, capital, SIRET, adresse du siège, directeur de la publication, hébergeur.</p>
-      <p><strong>L’abus d’alcool est dangereux pour la santé. À consommer avec modération.</strong></p>
+      <p>ampov-distillery.com</p>
+
+      <h2>1. Éditeur du site</h2>
+      <p>
+        Raison sociale : {site.legalName}<br />
+        Forme juridique : société à responsabilité limitée (Co., Ltd) — droit cambodgien<br />
+        Siège social : {site.address.street}, {site.address.city} {site.address.postalCode}, Royaume du Cambodge<br />
+        Numéro d’enregistrement : [à compléter — Ministry of Commerce, Cambodge]<br />
+        Directeur de la publication : [à compléter]<br />
+        Contact : <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+
+      {/* À METTRE À JOUR avant la mise en ligne : l'ancien texte citait Cloudways (DigitalOcean, Singapour) et Cloudflare. */}
+      <h2>2. Hébergement</h2>
+      <p>Prestataire : [à compléter selon l’hébergeur retenu]</p>
+
+      <h2>3. Propriété intellectuelle</h2>
+      <p>L’ensemble des contenus présents sur le site ampov-distillery.com — textes, photographies, illustrations, logo, identité visuelle, vidéos et autres éléments — sont la propriété exclusive d’{site.legalName}, sauf mention contraire.</p>
+      <p>Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sans l’autorisation écrite préalable d’{site.legalName}.</p>
+      <p>Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient est considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des lois applicables.</p>
+
+      <h2>4. Données personnelles</h2>
+      <p>Les données personnelles collectées sur ce site (formulaire de demande de visite, adresse e-mail) sont utilisées exclusivement aux fins de traitement de vos demandes et de communication relative aux activités d’Ampov Distillery.</p>
+      <p>Conformément au Règlement général sur la protection des données (RGPD) applicable aux visiteurs de l’Union européenne, vous disposez d’un droit d’accès, de rectification, d’opposition et de suppression des données vous concernant. Pour exercer ces droits, vous pouvez nous contacter à l’adresse suivante : <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p>Aucune donnée personnelle n’est vendue ou transmise à des tiers sans votre consentement explicite.</p>
+
+      {/* À METTRE À JOUR si un outil de mesure d'audience est ajouté (l'ancien site utilisait Google Analytics). */}
+      <h2>5. Cookies et stockage local</h2>
+      <p>Ce site n’utilise aucun cookie de mesure d’audience ni de publicité. Votre navigateur conserve uniquement une information locale indiquant que vous avez confirmé être majeur, afin de ne pas vous reposer la question à chaque visite.</p>
+
+      <h2>6. Vente en ligne — avertissement</h2>
+      <p>La vente de produits spiritueux via ce site est exclusivement réservée aux résidents du Royaume du Cambodge, dans le respect de la législation locale en vigueur concernant la vente et la distribution de boissons alcoolisées.</p>
+      <p>Les visiteurs résidant en dehors du Cambodge ne peuvent pas effectuer d’achat en ligne via ce site. Ils sont invités à contacter Ampov Distillery directement pour toute demande de distribution ou d’importation.</p>
+
+      <h2>7. Avertissement — consommation d’alcool</h2>
+      <p><strong>{site.healthWarning}</strong></p>
+      <p>La vente d’alcool est interdite aux mineurs de moins de 18 ans. En accédant à ce site, vous confirmez être majeur selon la législation de votre pays de résidence. Ampov Distillery se réserve le droit de demander une preuve d’âge à tout moment lors du processus de commande.</p>
+
+      <h2>8. Limitation de responsabilité</h2>
+      <p>{site.legalName} s’efforce d’assurer l’exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, elle ne peut garantir l’exhaustivité ou l’absence d’erreur de ces informations. {site.legalName} ne saurait être tenue responsable des dommages directs ou indirects résultant de l’utilisation de ce site ou de l’impossibilité d’y accéder.</p>
+
+      <h2>9. Droit applicable</h2>
+      <p>Les présentes mentions légales sont soumises au droit du Royaume du Cambodge. En cas de litige, les tribunaux cambodgiens seront seuls compétents. Pour les visiteurs résidant dans l’Union européenne, les dispositions impératives du droit de leur pays de résidence demeurent applicables.</p>
+      <p><em>Dernière mise à jour : juillet 2026</em></p>
     </div>
   </section>
 </Base>

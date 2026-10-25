@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Pic from './Pic.astro';
+import { img } from '../data/images';
+interface Props { rum: CollectionEntry<'gamme'> }
+const { rum } = Astro.props;
+const has = rum.data.image && img(rum.data.image);
+---
+<a class="card" href={`/gamme/${rum.id}/`}>
+  {has
+    ? <Pic path={rum.data.image!} alt={rum.data.name} widths={[300, 450, 600]} sizes="(min-width: 60rem) 16rem, 45vw" />
+    : <div class="ph" aria-hidden="true">{rum.data.name}</div>}
+  <div class="body">
+    <p class="meta">{rum.data.type}</p>
+    <h3>{rum.data.name}</h3>
+  </div>
+</a>

@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../data/images';
+
+// Affiche une image de src/assets/ ; ne rend rien si le fichier n'existe pas encore.
+interface Props {
+  path: string;
+  alt?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+const { path, alt = '', widths = [480, 800, 1200], sizes = '(min-width: 60rem) 34rem, 100vw', loading = 'lazy', class: cls } = Astro.props;
+const src = img(path);
+---
+{src && <Image src={src} alt={alt} widths={widths} sizes={sizes} loading={loading} class={cls} />}

@@ -1,0 +1,10 @@
+{
+  // Site 100 % statique : Cloudflare sert directement le dossier dist/ (pas de Worker, pas d'adaptateur).
+  // Le nom doit rester identique au Worker existant dans Cloudflare.
+  "name": "ampov-distillery",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

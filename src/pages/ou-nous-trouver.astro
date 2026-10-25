@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { regions } from '../data/partners';
+import { img } from '../data/images';
+---
+<Base title="Où nous trouver" description="Où acheter ou déguster les rhums Ampov : cavistes partenaires, bars, hôtels et restaurants en France, en Europe, au Cambodge et au Japon.">
+  <section class="section">
+    <div class="wrap">
+      <h1>Où nous trouver</h1>
+      <p class="lead">Cavistes, e-shops, bars, hôtels et restaurants partenaires.</p>
+      {regions.map((r) => (
+        <section>
+          <h2 style="margin-top:3rem">{r.title}</h2>
+          <div class="grid">
+            {r.partners.map((p) => {
+              const logo = p.logo ? img(p.logo) : undefined;
+              const Tag = p.url ? 'a' : 'div';
+              return (
+                <Tag class="card partner" href={p.url} {...(p.url ? { rel: 'noopener', target: '_blank' } : {})}>
+                  {logo && <Image src={logo} alt="" width={300} height={300} widths={[150, 300]} sizes="150px" loading="lazy" class="logo" />}
+                  <div class="body">
+                    <p class="meta"><span class="chip">{p.type}</span></p>
+                    <h3>{p.name}</h3>
+                    <p class="meta">{[p.address, p.city].filter(Boolean).join(' — ')}</p>
+                    {p.url && <p class="meta">Visiter le site web →</p>}
+                  </div>
+                </Tag>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+</Base>
+<style>
+  .partner :global(.logo) { aspect-ratio: 1; object-fit: contain; background: #fff; padding: .75rem; width: 100%; height: auto; }
+  .partner .meta { margin-bottom: .35rem; }
+</style>

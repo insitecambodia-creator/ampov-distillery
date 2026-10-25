@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Pic from '../../components/Pic.astro';
+import { img } from '../../data/images';
+
+export async function getStaticPaths() {
+  return (await getCollection('gamme')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+const hasImage = data.image && img(data.image);
+const rangeLabel = data.range === 'permanente' ? 'Gamme permanente' : 'Gamme collection';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Product', name: data.name, brand: { '@type': 'Brand', name: 'Ampov' }, ...(data.sku && { sku: data.sku }) };
+---
+<Base title={data.name} description={data.summary ?? `${data.name} — ${rangeLabel}, Ampov Distillery.`}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="section">
+    <div class="wrap split">
+      {hasImage && <Pic path={data.image!} alt={data.name} loading="eager" widths={[400, 700]} sizes="(min-width: 50rem) 28rem, 100vw" />}
+      <div class="prose">
+        <p class="eyebrow">{rangeLabel} · {data.type}</p>
+        <h1>{data.name}</h1>
+        {data.summary && <p class="lead">{data.summary}</p>}
+        <Content />
+        {/* Futur : prix + bouton « Ajouter au panier » (boutique). */}
+        <p><a class="btn" href="/ou-nous-trouver/">Où trouver Ampov</a> <a class="btn ghost" href="/nos-creations/">← Toute la gamme</a></p>
+      </div>
+    </div>
+  </section>
+</Base>

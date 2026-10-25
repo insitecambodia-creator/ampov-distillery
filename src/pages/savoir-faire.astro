@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import Gallery from '../components/Gallery.astro';
+---
+<Base title="Savoir-faire" description="L’excellence artisanale au cœur de notre atelier : réception de la canne, pressage, fermentations longues, distillation en alambics cuivre Holstein & Gillain, vieillissement tropical.">
+  <section class="section">
+    <div class="wrap prose">
+      <p class="eyebrow">L’excellence artisanale au cœur de notre atelier</p>
+      <h1>Savoir-faire</h1>
+      <p class="lead">Dans notre atelier, chaque geste compte. Nous travaillons avec patience, précision et respect du produit.</p>
+      <h2>Le savoir-faire Ampov : précision, tradition et artisanat</h2>
+      <p>Le savoir-faire Ampov repose sur une conviction simple : un grand rhum naît d’une matière première vivante et d’un travail précis, patient, entièrement artisanal. Chaque étape (de la coupe de la canne à la mise en bouteille) est réalisée avec une exigence rare en Asie du Sud-Est.</p>
+      <Gallery paths={['savoir-faire/tuktuk-1.webp', 'savoir-faire/tuktuk-2.webp']} alt="La canne arrive par tuk-tuk" />
+
+      <h2>Réception</h2>
+      <p class="eyebrow">Contrôle qualité</p>
+      <p>La première phase de notre process est la réception de la canne et le contrôle qualité : vérifications visuelles, mesures (taux de Brix, densité, pH), puis pesage.</p>
+      <Gallery paths={['savoir-faire/reception-canne.webp', 'savoir-faire/reception-collage.webp', 'savoir-faire/reception1.webp', 'savoir-faire/reception2.webp', 'savoir-faire/reception3.webp', 'savoir-faire/reception4.webp', 'savoir-faire/reception5.webp']} alt="Réception et contrôle de la canne" />
+
+      <h2>Pressage</h2>
+      <p>Nous pressons la canne dès réception (après lavage) pour obtenir une pureté exemplaire et un jus 100 % pur canne naturel. Pas d’eau ajoutée durant le pressage, et uniquement le premier jus — première presse.</p>
+      <p>Une fois la canne pressée, nous obtenons le jus de canne, aussi appelé « vesou ». Ce jus est mis en fermentation dans la foulée pour éviter toute oxydation et contamination (dans la mesure où nous n’ajoutons aucun acide).</p>
+      <Gallery paths={['savoir-faire/pressage-machine.webp', 'savoir-faire/pressage-jus.webp']} alt="Pressage de la canne et jus de canne (vesou)" />
+      <iframe class="video" src="https://www.youtube-nocookie.com/embed/wM9DfTOj_jw" title="Pressage de la canne à sucre" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+
+      <h2>Notre mélasse</h2>
+      <p>Nous travaillons également une mélasse locale particulièrement aromatique, issue d’une sucrerie du nord du Cambodge.</p>
+      <p>Petit rappel : la mélasse de canne est un sous-produit de la fabrication du sucre de canne — un liquide épais et sombre, obtenu après la cristallisation du sucre à partir du jus de canne, ce qui reste une fois la majorité du sucre extrait.</p>
+      <p>Une fois fermentée et distillée, cette matière première donne un rhum de mélasse, ou rhum traditionnel, aux profils aromatiques riches, ronds et caramélisés (contrairement au rhum pur jus, plus végétal). Ces rhums de mélasse sont tout à fait complémentaires des rhums pur jus.</p>
+      <Pic path="savoir-faire/melasse.webp" alt="Mélasse de canne" />
+
+      <h2>Les fermentations longues à très longues : la naissance des arômes</h2>
+      <p>La fermentation est l’étape clé du profil aromatique. Ampov utilise des levures naturelles ou sélectionnées selon les cuvées, pour créer des rhums expressifs et complexes.</p>
+      <p>Ampov se distingue par des fermentations spécifiques, totalement contrôlées, pensées pour révéler une intensité aromatique peu commune. Sur mélasse, la fermentation est conduite sans acidification, avec des protocoles dédiés. Certaines cuvées vont plus loin encore, avec des fermentations spontanées (« wild ») pouvant dépasser 12 jours, pour un caractère plus libre, vibrant, et une complexité accrue. Cette approche fait d’Ampov une maison audacieuse, à la fois technique et créative, recherchée par les amateurs de rhums artisanaux atypiques.</p>
+      <Gallery paths={['savoir-faire/fermentation-1.webp', 'savoir-faire/fermentation-2.webp', 'savoir-faire/fermentation-3.webp', 'savoir-faire/fermentation-4.webp', 'savoir-faire/bubble.webp']} alt="Fermentation du jus de canne" />
+
+      <h2>Distillation en alambics cuivre Holstein & Gillain</h2>
+      <p>Deux alambics importés d’Alsace permettent une distillation précise et artisanale :</p>
+      <ul class="ticks">
+        <li><strong>Holstein 120 L</strong> : précision, finesse, extraction aromatique délicate</li>
+        <li><strong>Gillain 600 L</strong> : puissance, structure, rondeur</li>
+      </ul>
+      <p>La double distillation permet :</p>
+      <ul class="ticks">
+        <li>une sélection stricte des cœurs,</li>
+        <li>une élimination des impuretés,</li>
+        <li>une intensité aromatique exceptionnelle,</li>
+        <li>une texture plus ronde et plus grasse.</li>
+      </ul>
+      <p>Le cuivre joue un rôle essentiel : il fixe les composés soufrés et révèle les arômes nobles du pur jus.</p>
+      <Gallery paths={['savoir-faire/alambic.webp', 'savoir-faire/alambic2.webp', 'savoir-faire/alambic3.webp', 'savoir-faire/alambic4.webp']} alt="Alambics en cuivre Holstein et Gillain" />
+
+      <h2>Maturation</h2>
+      <p>Pour sortir la quintessence de notre rhum blanc, nous le faisons mûrir en dame-jeanne ouverte (uniquement un filtre sur le dessus) de 54 L, à l’abri de la lumière, avec une aération régulière (affinage), pour une durée totale de plusieurs mois.</p>
+      <p>Cette maturation permet d’obtenir trois éléments — l’estérification, l’acétylation et l’oxydation — ainsi qu’une harmonie de notre rhum. Sans cette maturation, le rhum possède une certaine agressivité : une saveur brûlante (due à un degré alcoolique élevé), une sécheresse caractéristique, un arôme manquant d’harmonie et de complexité avec une note de « chaudière » plus ou moins marquée (la « jeunesse » organoleptique). On appelle aussi cela la « stabulation », ou repos pour stabilisation.</p>
+      <Pic path="savoir-faire/cave.webp" alt="Maturation en dames-jeannes" />
+
+      <h2>Inside the barrel</h2>
+      <p>La chauffe d’un fût, c’est bien plus qu’un simple passage au feu. C’est une étape clé qui révèle les arômes du bois : vanille, caramel, épices, notes toastées… Chaque chauffe est différente, chaque fût a sa propre personnalité. Un travail de précision, entre tradition et savoir-faire artisanal.</p>
+      <Gallery paths={['savoir-faire/barrique-1.webp', 'savoir-faire/barrique-2.webp', 'savoir-faire/fut-1.webp', 'savoir-faire/fut-2.webp', 'savoir-faire/fut-3.webp']} alt="Chauffe des fûts" />
+
+      <h3>Préparation des fûts</h3>
+      <p>À réception des fûts, nous les remplissons d’eau jusqu’à étanchéité complète. Ensuite, « culottage » des fûts avec de petites eaux pendant quelques jours.</p>
+
+      <h2>Vieillissement tropical dans le chai Sabay</h2>
+      <p>Notre « Sabay Chai », qui signifie « paisible » ou « bien-être » en khmer, a la particularité d’être un chai à température élevée. Il se situe à proximité du Mékong et de la rivière Bassac, qui évoquent tous deux le voyage et la tradition.</p>
+      <p>Les rhums vieillis Ampov développent naturellement rondeur, profondeur et notes boisées. La chaleur tropicale accélère l’interaction entre le bois et l’alcool. Résultat : un rhum plus profond, plus expressif, sans aucun additif.</p>
+      <p>Dans notre chai, nous avons des fûts de Cognac, de Bourbon, de Chardonnay, de Vino Santo, de Pinot Noir, de Sauternes et de Montbazillac. Ces fûts peuvent servir aussi bien pour le vieillissement principal que pour une finition, quel que soit l’âge de vieillissement.</p>
+      <Gallery paths={['savoir-faire/sauternes.webp', 'savoir-faire/fut-copy.webp']} alt="Chai de vieillissement" />
+
+      <h3>Transferts de fûts</h3>
+      <Gallery paths={['savoir-faire/transferfur-1.webp', 'savoir-faire/transferfur-2.webp']} alt="Transfert de fûts" />
+
+      <h2>Mise en bouteille artisanale</h2>
+      <p>Ampov revendique une transparence totale : un rhum pur, vivant, fidèle à son terroir. Chaque lot est embouteillé.</p>
+      <Gallery paths={['savoir-faire/misebouteille.webp', 'savoir-faire/seal.webp', 'savoir-faire/bottles-yellow.webp', 'savoir-faire/bouteille-etiquette.webp']} alt="Mise en bouteille artisanale" />
+    </div>
+  </section>
+</Base>

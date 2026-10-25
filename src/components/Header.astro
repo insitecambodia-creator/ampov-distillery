@@ -1,11 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import { nav, site } from '../data/site';
+import { img } from '../data/images';
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const logo = img('brand/logo.png');
 ---
 <header class="hdr">
   <div class="wrap bar">
-    <a class="brand" href="/">{site.name}</a>
+    <a class="brand" href="/" aria-label={`${site.name} — accueil`}>
+      {logo ? <Image src={logo} alt={site.name} height={80} widths={[80, 160, 240]} sizes="auto" loading="eager" /> : 'Ampov'}
+    </a>
     <nav aria-label="Navigation principale">
       <ul>
         {nav.map((n) => (
@@ -16,10 +21,12 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   </div>
 </header>
 <style>
-  .hdr { border-bottom: 1px solid var(--line); }
+  .hdr { background: #f6f1e7; color: #14110e; border-bottom: 1px solid #d9cfbd; } /* le logo est conçu pour fond clair */
   .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 2rem; padding-block: 1rem; }
-  .brand { font: 600 1.35rem var(--serif); letter-spacing: .08em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+  .brand { font: 600 1.6rem var(--serif); letter-spacing: .3em; text-transform: uppercase; color: #14110e; text-decoration: none; }
+  .brand { display: block; line-height: 0; }
+  .brand :global(img) { height: 5rem; width: auto; }
   ul { display: flex; flex-wrap: wrap; gap: .25rem 1.75rem; list-style: none; margin: 0; padding: 0; }
-  nav a { color: var(--muted); text-decoration: none; padding-block: .35rem; border-bottom: 2px solid transparent; }
-  nav a:hover, nav a[aria-current] { color: var(--fg); border-bottom-color: var(--accent); }
+  nav a { color: #5a4d38; text-decoration: none; padding-block: .35rem; border-bottom: 2px solid transparent; }
+  nav a:hover, nav a[aria-current] { color: #14110e; border-bottom-color: #895716; }
 </style>

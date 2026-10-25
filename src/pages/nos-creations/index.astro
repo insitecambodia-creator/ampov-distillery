@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import RumCard from '../../components/RumCard.astro';
+import Pic from '../../components/Pic.astro';
+
+const all = (await getCollection('gamme')).sort((a, b) => a.data.order - b.data.order);
+const permanente = all.filter((r) => r.data.range === 'permanente');
+const collection = all.filter((r) => r.data.range === 'collection');
+---
+<Base title="Nos Créations" description="Ampov est créateur de rhums purs, uniques et rares (Single Cask, Brut de fût, Édition Limitée, High Ester…) en mariant la technologie de la fermentation et de la distillation française au terroir cambodgien.">
+  <section class="section">
+    <div class="wrap">
+      <div class="prose">
+        <p class="eyebrow">Héritage & Authenticité</p>
+        <h1>Nos créations</h1>
+        <p class="lead">Ampov incarne l’alchimie parfaite entre tradition, innovation et audace.</p>
+        <p>Ampov est créateur de rhums purs, uniques et rares (Single Cask, Brut de fût, Édition Limitée, High Ester…) en mariant la technologie de la fermentation et de la distillation françaises au terroir cambodgien : canne endémique cultivée par de petits producteurs, sans produits chimiques et récoltée manuellement.</p>
+        <p>Nos rhums sont issus de fermentations particulières, totalement maîtrisées, et de distillations pointues, puis maturés plusieurs semaines en dame-jeanne pour les rhums blancs, ou vieillis dans notre chai tropical « Sabay » à température élevée. Cet endroit magique, où les fûts reposent et où le temps façonne les arômes, les saveurs et la finesse de nos cuvées, toutes élaborées sans compromis.</p>
+        <p>L’identité d’Ampov est la créativité, l’originalité, l’élégance, le respect de la tradition, l’excellence artisanale, une expression aromatique rare qui en fait véritablement notre signature. Chaque cuvée révèle une personnalité unique, subtile et puissante.</p>
+        <p>Nous sommes en quête perpétuelle de pureté naturelle et d’authenticité pour vous offrir une expression unique des trésors du Cambodge. La dégustation des rhums Ampov est une véritable expérience sensorielle, une invitation au voyage à travers la culture khmère et ses trésors cachés.</p>
+        <h2>Une collection distillée avec maîtrise</h2>
+        <p>Des blancs puissants aux cuvées vieillies sous climat tropical, chaque rhum Ampov exprime une facette du Cambodge. Nos cuvées sont pensées pour la dégustation, mais aussi pour la gastronomie et les <a href="/nos-creations/associations-mets-rhums-cocktails/">accords mets-rhums</a>.</p>
+      </div>
+      <Pic path="gamme/creations-2.webp" alt="Cuvées Ampov Wild, édition limitée" />
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <h2>La gamme permanente</h2>
+      <div class="grid">{permanente.map((r) => <RumCard rum={r} />)}</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2>La gamme collection</h2>
+      <div class="grid">{collection.map((r) => <RumCard rum={r} />)}</div>
+    </div>
+  </section>
+</Base>
