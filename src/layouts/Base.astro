@@ -26,7 +26,8 @@ const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
     <meta name="description" content={description} />
     {!indexable && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#14110e" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content={site.locale} />
