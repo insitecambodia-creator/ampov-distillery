@@ -26,7 +26,7 @@ const familles = [
       ))}
     </ul>
     <p class="outro">Tous les rhums Ampov sont élaborés sans additif, sans sucre ajouté, sans compromis. Des rhums francs, expressifs, qui s’adressent aux amateurs comme aux curieux en quête de nouvelles émotions. Nous développons des profils aromatiques rares, pensés pour les accords mets-rhums, la cuisine et la haute gastronomie : une pureté aromatique, une fraîcheur végétale et une texture nette.</p>
-    <p><a class="gold" href="/nos-creations/">Découvrir toute la gamme →</a></p>
+    <p><a class="btn on-dark" href="/nos-creations/">Découvrir toute la gamme</a></p>
   </div>
 </section>
 <style>
@@ -45,9 +45,5 @@ const familles = [
   li p { margin: 0; font-size: .98rem; line-height: 1.5; }
   @media (max-width: 30rem) { h3 { font-size: 1.45rem; } li p { font-size: .9rem; } }
   .outro { max-width: 62rem; margin: clamp(2.5rem, 6vw, 4rem) auto 2rem; }
-  .gold {
-    display: inline-block; padding: .85rem 1.9rem; text-decoration: none; font: 600 1.1rem var(--display); letter-spacing: .02em;
-    color: #1a1305; background: linear-gradient(180deg, #e8cb78, #c9a449); border: 1px solid #b8923a;
-  }
-  .gold:hover { color: #1a1305; background: linear-gradient(180deg, #f3dd93, #d9b95c); }
+  p:has(> .btn) { justify-content: center; }
 </style>
