@@ -1,18 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
+import NosRhums from '../components/NosRhums.astro';
 import { Image } from 'astro:assets';
 import { img } from '../data/images';
 import { site } from '../data/site';
 
 const hero = img('home/home-page-1.webp');
-const rhums = [
-  { t: 'Blancs', d: 'Pur jus : expressifs, floraux, intenses' },
-  { t: 'Wild', d: 'Pur jus : fermentation spontanée, profil sauvage' },
-  { t: 'Ambrés', d: 'Rondeur, profondeur, vieillissement tropical' },
-  { t: 'Blend', d: 'Assemblages rares de pur jus et de mélasse : élégant & gourmand' },
-  { t: 'Vieux', d: 'Invitation au voyage : toujours en Single Cask' },
-];
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -61,15 +55,7 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="section alt">
-    <div class="wrap">
-      <h2>Nos rhums</h2>
-      <div class="cols-3">
-        {rhums.map((r) => <div class="tile"><h3>{r.t}</h3><p>{r.d}</p></div>)}
-      </div>
-      <p style="margin-top:2rem"><a href="/nos-creations/">Découvrir toute la gamme →</a></p>
-    </div>
-  </section>
+  <NosRhums />
 
   <section class="section">
     <div class="wrap prose">
