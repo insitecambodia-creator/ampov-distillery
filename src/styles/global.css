@@ -1,17 +1,19 @@
 :root {
-  --bg: #14110e;
-  --bg-alt: #1d1915;
-  --fg: #f1e9dc;
-  --muted: #b3a894;
-  --accent: #c8913a;
-  --accent-fg: #14110e;
-  --line: #3a332a;
+  --bg: #fbf8f2;
+  --bg-alt: #f3ece0;
+  --fg: #1f1a14;
+  --muted: #655948;
+  --accent: #895716;
+  --accent-hover: #6a410d;
+  --accent-fg: #ffffff;
+  --accent-light: #e6b05a; /* accent sur fond sombre (photos) */
+  --line: #ded3bf;
   --maxw: 68rem;
   --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { color-scheme: dark; -webkit-text-size-adjust: 100%; }
+html { color-scheme: light; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--fg);
   font: 1.0625rem/1.65 var(--sans);
@@ -20,7 +22,7 @@ body {
 main { flex: 1; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--accent); text-underline-offset: .2em; }
-a:hover { color: #e3ac55; }
+a:hover { color: var(--accent-hover); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0 0 .5em; letter-spacing: .01em; }
 h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
@@ -45,7 +47,7 @@ p { margin: 0 0 1em; }
 .card .body { padding: 1.25rem; }
 .card h3 { margin-bottom: .25rem; }
 .card .meta { color: var(--muted); font-size: .9rem; margin: 0; }
-.ph { aspect-ratio: 4/5; background: linear-gradient(160deg, #2a2219, #17130f); display: grid; place-items: center; color: var(--muted); font-family: var(--serif); font-size: .95rem; }
+.ph { aspect-ratio: 4/5; background: linear-gradient(160deg, #efe5d3, #e4d6bd); display: grid; place-items: center; color: var(--muted); font-family: var(--serif); font-size: .95rem; }
 .prose { max-width: 42rem; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: -999px; top: 0; background: var(--accent); color: var(--accent-fg); padding: .5rem 1rem; z-index: 10; }
@@ -53,9 +55,14 @@ p { margin: 0 0 1em; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
 /* ---- Pages ---- */
-.hero { position: relative; isolation: isolate; padding-block: clamp(5rem, 14vw, 10rem); background: radial-gradient(ellipse at 70% 0%, #2c2217 0%, var(--bg) 60%); overflow: hidden; }
+.hero { position: relative; isolation: isolate; padding-block: clamp(5rem, 14vw, 10rem); background: linear-gradient(135deg, #3b2a17, #1f1810); color: #fff; overflow: hidden; }
 .hero > picture, .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.hero:has(> img)::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(20,17,14,.88), rgba(20,17,14,.35)); }
+.hero:has(> img)::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(20,15,10,.82), rgba(20,15,10,.2)); }
+.hero h1, .hero .lead { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.35); }
+.hero .eyebrow { color: var(--accent-light); font-weight: 600; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+.hero .btn.ghost { color: #fff; border-color: rgba(255,255,255,.6); }
+.hero .btn.ghost:hover { background: #fff; color: var(--accent); border-color: #fff; }
+.hero .btn:hover { background: #fff; color: var(--accent); border-color: #fff; }
 .page-title { padding-block: clamp(2.5rem, 7vw, 5rem) 1rem; }
 .split { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); align-items: center; }
 .split img { width: 100%; height: auto; }
@@ -74,7 +81,7 @@ p { margin: 0 0 1em; }
 .cols-2 { columns: 2 18rem; column-gap: 3rem; }
 form.stack { display: grid; gap: 1rem; max-width: 34rem; }
 form.stack label { display: grid; gap: .3rem; font-size: .95rem; color: var(--muted); }
-form.stack input, form.stack select, form.stack textarea { font: inherit; padding: .65rem .8rem; background: var(--bg-alt); color: var(--fg); border: 1px solid var(--line); }
+form.stack input, form.stack select, form.stack textarea { font: inherit; padding: .65rem .8rem; background: #fff; color: var(--fg); border: 1px solid var(--line); }
 form.stack input[type=range] { padding: 0; accent-color: var(--accent); }
 form.stack .row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
 .hp { position: absolute; left: -9999px; }

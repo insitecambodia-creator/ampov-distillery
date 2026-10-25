@@ -21,12 +21,12 @@ const logo = img('brand/logo.png');
   </div>
 </header>
 <style>
-  .hdr { background: #f6f1e7; color: #14110e; border-bottom: 1px solid #d9cfbd; } /* le logo est conçu pour fond clair */
+  .hdr { background: var(--bg); border-bottom: 1px solid var(--line); }
   .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 2rem; padding-block: 1rem; }
-  .brand { font: 600 1.6rem var(--serif); letter-spacing: .3em; text-transform: uppercase; color: #14110e; text-decoration: none; }
+  .brand { font: 600 1.6rem var(--serif); letter-spacing: .3em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
   .brand { display: block; line-height: 0; }
   .brand :global(img) { height: 5rem; width: auto; }
   ul { display: flex; flex-wrap: wrap; gap: .25rem 1.75rem; list-style: none; margin: 0; padding: 0; }
-  nav a { color: #5a4d38; text-decoration: none; padding-block: .35rem; border-bottom: 2px solid transparent; }
-  nav a:hover, nav a[aria-current] { color: #14110e; border-bottom-color: #895716; }
+  nav a { color: var(--muted); text-decoration: none; padding-block: .35rem; border-bottom: 2px solid transparent; }
+  nav a:hover, nav a[aria-current] { color: var(--fg); border-bottom-color: var(--accent); }
 </style>
