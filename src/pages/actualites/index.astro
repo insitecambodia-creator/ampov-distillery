@@ -1,31 +1,25 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Pic from '../../components/Pic.astro';
-import { img } from '../../data/images';
+import PostCard from '../../components/PostCard.astro';
 
-const items = (await getCollection('actualites')).sort((a, b) => a.data.order - b.data.order);
+// Blog : du plus récent au plus ancien ; le plus récent est mis en avant.
+const posts = (await getCollection('actualites')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const [latest, ...older] = posts;
 ---
-<Base title="Actualités" description="Les dernières nouvelles, annonces et publications médiatiques concernant Ampov : innovations, engagements et présence dans les événements.">
+<Base title="Actualités" description="Les dernières nouvelles, annonces et événements d’Ampov Distillery : dégustations, festivals, partenariats et vie de la distillerie.">
   <section class="section">
     <div class="wrap">
+      <p class="eyebrow">Le blog</p>
       <h1>Actualités</h1>
-      <p class="lead">Retrouvez ici les dernières nouvelles et annonces d’Ampov. <a href="/actualites/dans-la-presse/">Voir aussi : Ampov dans la presse →</a></p>
-      <div class="grid">
-        {items.map((a) => {
-          const link = a.body?.trim() ? `/actualite/${a.id}/` : undefined;
-          const Tag = link ? 'a' : 'div';
-          return (
-            <Tag class="card" href={link}>
-              {a.data.image && img(a.data.image) && <Pic path={a.data.image} alt="" widths={[320, 480, 640]} sizes="(min-width: 60rem) 20rem, 90vw" />}
-              <div class="body">
-                <h3>{a.data.title}</h3>
-                {a.data.excerpt && <p class="meta">{a.data.excerpt}</p>}
-              </div>
-            </Tag>
-          );
-        })}
-      </div>
+      <p class="lead">Les dernières nouvelles d’Ampov : événements, dégustations, rencontres et vie de la distillerie.</p>
+      {latest && <PostCard post={latest} featured />}
+      {older.length > 0 && <div class="grid posts">{older.map((p) => <PostCard post={p} />)}</div>}
+      <p class="foot">Retrouvez aussi les articles qui parlent de nous : <a href="/actualites/dans-la-presse/">Ampov dans la presse</a>.</p>
     </div>
   </section>
 </Base>
+<style>
+  .posts { margin-top: 2rem; }
+  .foot { margin-top: 3rem; color: var(--muted); }
+</style>
