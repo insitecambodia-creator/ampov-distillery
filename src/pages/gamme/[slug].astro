@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Pic from '../../components/Pic.astro';
+import RumCard from '../../components/RumCard.astro';
 import { img } from '../../data/images';
 
 export async function getStaticPaths() {
@@ -12,21 +13,92 @@ const { data } = entry;
 const { Content } = await render(entry);
 const hasImage = data.image && img(data.image);
 const rangeLabel = data.range === 'permanente' ? 'Gamme permanente' : 'Gamme collection';
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Product', name: data.name, brand: { '@type': 'Brand', name: 'Ampov' }, ...(data.sku && { sku: data.sku }) };
+
+// Fiche technique : on n'affiche que ce qui est renseigné.
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const specs: [string, string][] = [
+  ['Type de rhum', data.rhumType],
+  ['Contenance', data.volumeCl ? `${data.volumeCl} cl` : undefined],
+  ['Degré', data.abv ? `${String(data.abv).replace('.', ',')} % vol.` : undefined],
+  ['Matière première', data.rawMaterial],
+  ['Fermentation', data.fermentation && cap(data.fermentation)],
+  ['Distillation', data.distillation && cap(data.distillation)],
+  ['Âge', data.age],
+  ['Millésime', data.vintage],
+].filter((s): s is [string, string] => Boolean(s[1]));
+
+// « Robe : … / Nez : … / Bouche : … / Finale : … » devient une liste.
+const tastingLines = data.tasting ? (data.tasting.includes(' / ') ? data.tasting.split(' / ') : [data.tasting]) : [];
+const splitLabel = (l: string) => { const m = l.match(/^(Robe|Nez|Bouche|Finale)\s*:\s*(.*)$/); return m ? { label: m[1], text: m[2] } : { label: '', text: l }; };
+
+// « Découvrez aussi » : les autres rhums de la gamme, collection d'abord.
+const others = (await getCollection('gamme'))
+  .filter((r) => r.id !== entry.id)
+  .sort((a, b) => Number(b.data.range === 'collection') - Number(a.data.range === 'collection') || a.data.order - b.data.order)
+  .slice(0, 3);
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Product', name: data.name, brand: { '@type': 'Brand', name: 'Ampov' },
+  ...(data.summary && { description: data.summary }), ...(data.sku && { sku: data.sku }),
+};
 ---
 <Base title={data.name} description={data.summary ?? `${data.name} — ${rangeLabel}, Ampov Distillery.`}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <section class="section">
-    <div class="wrap split">
-      {hasImage && <Pic path={data.image!} alt={data.name} loading="eager" widths={[400, 700]} sizes="(min-width: 50rem) 28rem, 100vw" />}
+    <div class="wrap split top">
+      {hasImage && <div class="visual"><Pic path={data.image!} alt={data.name} loading="eager" widths={[400, 700]} sizes="(min-width: 50rem) 28rem, 100vw" /></div>}
       <div class="prose">
         <p class="eyebrow">{rangeLabel} · {data.type}</p>
         <h1>{data.name}</h1>
-        {data.summary && <p class="lead">{data.summary}</p>}
-        <Content />
+        <div class="desc"><Content /></div>
+        {specs.length > 0 && (
+          <dl>{specs.map(([k, v]) => <><dt>{k}</dt><dd>{v}</dd></>)}</dl>
+        )}
         {/* Futur : prix + bouton « Ajouter au panier » (boutique). */}
-        <p><a class="btn" href="/ou-nous-trouver/">Où trouver Ampov</a> <a class="btn ghost back" href="/nos-creations/">Toute la gamme</a></p>
+        <p><a class="btn" href="/ou-nous-trouver/">Où trouver Ampov</a><a class="btn ghost back" href="/nos-creations/">Toute la gamme</a></p>
       </div>
     </div>
   </section>
+
+  {(tastingLines.length > 0 || data.pairing) && (
+    <section class="section alt">
+      <div class="wrap notes">
+        {tastingLines.length > 0 && (
+          <div>
+            <h2>Note de dégustation</h2>
+            <ul class="tasting">
+              {tastingLines.map((l) => { const { label, text } = splitLabel(l); return <li>{label && <strong>{label}</strong>} {text}</li>; })}
+            </ul>
+          </div>
+        )}
+        {data.pairing && (
+          <div>
+            <h2>Conseil de dégustation</h2>
+            <p>{data.pairing}</p>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Découvrez aussi</h2>
+      <div class="grid">{others.map((r) => <RumCard rum={r} />)}</div>
+    </div>
+  </section>
 </Base>
+<style>
+  .top { align-items: start; }
+  .visual { background: var(--bg-alt); padding: 1.5rem; display: grid; place-items: center; }
+  .visual :global(img) { width: auto; max-width: 100%; max-height: min(34rem, 75vh); object-fit: contain; }
+  .desc :global(p) { color: var(--muted); font-size: 1.1rem; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: .45rem 1.75rem; margin: 1.75rem 0 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  dt { color: var(--muted); }
+  dd { margin: 0; font-weight: 500; }
+  .notes { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  .notes h2 { font-size: 1.7rem; }
+  .tasting { list-style: none; margin: 0; padding: 0; }
+  .tasting li { margin-bottom: .6rem; }
+  .tasting strong { color: var(--accent); margin-right: .25rem; }
+</style>

@@ -14,6 +14,14 @@ const gamme = defineCollection({
     type: z.string(), // Blanc, Ambré, Blend…
     image: z.string().optional(),
     summary: z.string().optional(),
+    rhumType: z.string().optional(), // « Type de rhum » de la fiche (Ambré ESB, Vieilli, Blanc…)
+    fermentation: z.string().optional(),
+    distillation: z.string().optional(),
+    age: z.string().optional(),
+    vintage: z.string().optional(),
+    rawMaterial: z.string().optional(),
+    tasting: z.string().optional(), // note de dégustation
+    pairing: z.string().optional(), // conseil de dégustation / accords
     abv: z.number().optional(),
     volumeCl: z.number().optional(),
     sku: z.string().optional(),
