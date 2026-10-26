@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import Gallery from '../../components/Gallery.astro';
 import { site } from '../../data/site';
 
@@ -8,9 +9,9 @@ import { site } from '../../data/site';
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 ---
 <Base title="Visiter la distillerie" description="À Phnom Penh : visite guidée de la distillerie Ampov, 5 $ par personne (déduit si achat de rhums), sur réservation uniquement.">
+  <PageHero title="Visiter la distillerie" image="heroes/visiter.webp" />
   <section class="section">
     <div class="wrap prose">
-      <h1>Visiter la distillerie</h1>
       <p class="lead">À Phnom Penh : visite guidée — 5 $ par personne (déduit si achat de rhums) — sur réservation uniquement pour garantir une expérience immersive et personnalisée — 1 h.</p>
       <p>La visite incontournable pour tout savoir sur l’élaboration des produits de la Distillerie Ampov. Visite des chais, des alambics et dégustation d’une sélection.</p>
       <p><strong>Adresse :</strong> {site.address.visit}</p>
@@ -38,7 +39,7 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
       <h3>Quelques-unes de nos dernières visites</h3>
     </div>
     <div class="wrap">
-      <Gallery paths={['visite/visitdistillerie.webp', 'visite/visite-1.webp', 'visite/visite-2.webp', 'visite/visite-3.webp']} alt="Visite de la distillerie Ampov" min="18rem" />
+      <Gallery paths={['visite/visite-1.webp', 'visite/visite-2.webp', 'visite/visite-3.webp']} alt="Visite de la distillerie Ampov" min="18rem" />
     </div>
   </section>
 </Base>

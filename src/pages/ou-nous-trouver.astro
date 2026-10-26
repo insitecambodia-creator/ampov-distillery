@@ -1,13 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import { regions } from '../data/partners';
 import { img } from '../data/images';
 ---
 <Base title="Où nous trouver" description="Où acheter ou déguster les rhums Ampov : cavistes partenaires, bars, hôtels et restaurants en France, en Europe, au Cambodge et au Japon.">
+  <PageHero title="Où nous trouver" image="heroes/ou-nous-trouver.webp" />
   <section class="section">
     <div class="wrap">
-      <h1>Où nous trouver</h1>
       <p class="lead">Cavistes, e-shops, bars, hôtels et restaurants partenaires.</p>
       {regions.map((r) => (
         <section>

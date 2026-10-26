@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
 <section class="visit">
   <div class="wrap">
     <h2>Venez visiter la distillerie lors de votre prochain séjour à Phnom Penh</h2>
-    <p><a class="btn" href="/contact/visiter-la-distillerie/">Cliquez ici</a></p>
+    <p><a class="btn on-dark" href="/contact/visiter-la-distillerie/">Cliquez ici</a></p>
   </div>
 </section>
 <footer class="ftr">
@@ -31,13 +31,12 @@ const year = new Date().getFullYear();
   </div>
 </footer>
 <style>
-  .visit { background: var(--accent); color: var(--accent-fg); padding-block: 3rem; text-align: center; }
-  .visit h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); max-width: 40rem; margin-inline: auto; }
-  .visit .btn { background: var(--accent-fg); color: var(--accent); border-color: var(--accent-fg); }
-  .visit .btn:hover { background: transparent; color: var(--accent-fg); }
+  .visit { background: #011a09; padding-block: 3rem; text-align: center; }
+  .visit h2 { color: #e6c971; font-size: clamp(1.4rem, 3vw, 2rem); max-width: 40rem; margin-inline: auto; }
+  .visit p:has(> .btn) { justify-content: center; margin: 0; }
   .ftr { background: var(--bg-alt); padding-block: 2.5rem 1.5rem; font-size: .95rem; }
   .cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
-  .name { font: 600 1.15rem var(--serif); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 .5rem; }
+  .name { font: 600 1.15rem var(--display); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 .5rem; }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
   a { color: var(--muted); } a:hover { color: var(--accent); }
   .muted { color: var(--muted); margin: 0 0 .25rem; }

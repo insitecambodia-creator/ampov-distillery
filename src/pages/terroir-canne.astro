@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import Pic from '../components/Pic.astro';
 import Gallery from '../components/Gallery.astro';
 const stades = [
@@ -10,13 +11,13 @@ const stades = [
 ];
 ---
 <Base title="Terroir & Canne" description="Climat tropical, sols riches, tradition agricole ancienne : le Cambodge offre des conditions parfaites pour une canne aromatique et puissante.">
+  <PageHero title="Terroir & Canne" image="heroes/terroir.webp" position="center 55%" />
   <section class="section">
     <div class="wrap prose">
-      <h1>Terroir & Canne</h1>
       <h2>Le Cambodge : un terroir idéal pour la canne</h2>
       <p>Climat tropical, sols riches, tradition agricole ancienne : le Cambodge offre des conditions parfaites pour une canne aromatique et puissante.</p>
       <p>Au cœur du terroir d’un rhum comme Ampov, il y a la canne, qui n’est pas qu’une matière première : elle est le reflet du climat et du sol où elle pousse.</p>
-      <Gallery paths={['terroir/producteur-champ.webp', 'terroir/ideal-1.webp', 'terroir/ideal-2.webp', 'terroir/plante-4mois-1.webp', 'terroir/plante-5mois-2.webp']} alt="Champs de canne à sucre au Cambodge" />
+      <Gallery paths={['terroir/ideal-1.webp', 'terroir/ideal-2.webp', 'terroir/plante-4mois-1.webp', 'terroir/plante-5mois-2.webp']} alt="Champs de canne à sucre au Cambodge" />
 
       <h2>Climat & sol</h2>
       <Pic path="terroir/climat-sol.webp" alt="Climat au Cambodge" />

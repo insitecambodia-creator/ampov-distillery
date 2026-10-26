@@ -1,18 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
+import NosRhums from '../components/NosRhums.astro';
 import { Image } from 'astro:assets';
 import { img } from '../data/images';
 import { site } from '../data/site';
 
 const hero = img('home/home-page-1.webp');
-const rhums = [
-  { t: 'Blancs', d: 'Pur jus : expressifs, floraux, intenses' },
-  { t: 'Wild', d: 'Pur jus : fermentation spontanée, profil sauvage' },
-  { t: 'Ambrés', d: 'Rondeur, profondeur, vieillissement tropical' },
-  { t: 'Blend', d: 'Assemblages rares de pur jus et de mélasse : élégant & gourmand' },
-  { t: 'Vieux', d: 'Invitation au voyage : toujours en Single Cask' },
-];
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -32,8 +26,8 @@ const jsonLd = {
     <div class="wrap">
       <p class="eyebrow">Distillerie artisanale · Phnom Penh</p>
       <h1>Rhum Ampov</h1>
-      <p class="lead" style="color:var(--fg)"><strong>Premier rhum de pur jus de canne cambodgien</strong><br />L’expression la plus créative du rhum artisanal cambodgien</p>
-      <p><a class="btn" href="/nos-creations/">Découvrir la gamme</a></p>
+      <p class="lead"><strong>Premier rhum de pur jus de canne cambodgien</strong><br />L’expression la plus créative du rhum artisanal cambodgien</p>
+      <p><a class="btn on-dark" href="/nos-creations/">Découvrir la gamme</a></p>
     </div>
   </section>
 
@@ -43,7 +37,7 @@ const jsonLd = {
         <p class="eyebrow">Rhum premium de pur jus cambodgien</p>
         <h2>L’artisanat d’exception, distillé avec précision</h2>
         <p>Distillation artisanale en alambics cuivre, fermentation longue, terroir unique. Chaque bouteille Ampov raconte une histoire vraie, façonnée avec exigence, transparence et passion.</p>
-        <p><a class="btn" href="/nos-creations/">Découvrir la gamme →</a></p>
+        <p><a class="btn" href="/nos-creations/">Découvrir la gamme</a></p>
       </div>
       <Pic path="home/alambic-cuivre.webp" alt="Alambic en cuivre de la distillerie Ampov" />
     </div>
@@ -54,22 +48,14 @@ const jsonLd = {
       <p class="eyebrow">Un rhum né du terroir cambodgien</p>
       <h2>Ampov est un rhum qui raconte une terre, un climat, une culture.</h2>
       <p>Au cœur des plaines du Cambodge, la canne à sucre pousse sous un climat tropical idéal, nourrie par des sols riches et récoltée à la main par de petits producteurs passionnés. Un pur jus, naturel, sans additif, qui exprime toute la richesse aromatique d’une terre unique.</p>
-      <p><a href="/terroir-canne/">Découvrir le terroir Ampov →</a></p>
+      <p><a class="btn ghost" href="/terroir-canne/">Découvrir le terroir Ampov</a></p>
       <h2>Un savoir-faire franco-cambodgien</h2>
       <p>La distillation est réalisée sur deux alambics « pot still » en cuivre importés d’Alsace : Holstein et Gillain. Fermentation longue, double distillation, sélection minutieuse des cœurs… Chaque étape est pensée pour créer un rhum d’une grande précision aromatique, rare en Asie du Sud-Est. Formé en Lorraine et à Cognac, Ralph a choisi d’unir technique française et matière première cambodgienne.</p>
-      <p><a href="/savoir-faire/">Découvrir le savoir-faire →</a></p>
+      <p><a class="btn ghost" href="/savoir-faire/">Découvrir le savoir-faire</a></p>
     </div>
   </section>
 
-  <section class="section alt">
-    <div class="wrap">
-      <h2>Nos rhums</h2>
-      <div class="cols-3">
-        {rhums.map((r) => <div class="tile"><h3>{r.t}</h3><p>{r.d}</p></div>)}
-      </div>
-      <p style="margin-top:2rem"><a href="/nos-creations/">Découvrir toute la gamme →</a></p>
-    </div>
-  </section>
+  <NosRhums />
 
   <section class="section">
     <div class="wrap prose">
