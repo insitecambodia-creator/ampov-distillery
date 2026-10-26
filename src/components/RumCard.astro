@@ -8,10 +8,15 @@ const has = rum.data.image && img(rum.data.image);
 ---
 <a class="card" href={`/gamme/${rum.id}/`}>
   {has
-    ? <Pic path={rum.data.image!} alt={rum.data.name} widths={[300, 450, 600]} sizes="(min-width: 60rem) 16rem, 45vw" />
+    ? <div class="shot"><Pic path={rum.data.image!} alt={rum.data.name} widths={[300, 450, 600]} sizes="(min-width: 60rem) 16rem, 45vw" /></div>
     : <div class="ph" aria-hidden="true">{rum.data.name}</div>}
   <div class="body">
     <p class="meta">{rum.data.type}</p>
     <h3>{rum.data.name}</h3>
   </div>
 </a>
+<style>
+  /* Bouteille entière, jamais rognée : cadre 3/4, image « contain », centrée */
+  .shot { aspect-ratio: 3 / 4; display: grid; place-items: center; padding: 1rem 1rem .5rem; }
+  .shot :global(img) { width: auto; height: auto; max-width: 100%; max-height: 100%; aspect-ratio: auto; object-fit: contain; }
+</style>

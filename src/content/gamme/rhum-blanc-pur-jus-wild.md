@@ -1,5 +1,5 @@
 ---
-name: "Rhum Blanc « Wild »"
+name: "Rhum Blanc « Wild »"
 range: "collection"
 type: "Blanc"
 rhumType: "Blanc"
