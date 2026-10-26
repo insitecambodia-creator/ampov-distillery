@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../data/images';
+
+// Bandeau d'en-tête de page : photo plein écran + titre. Sans photo (fichier absent), fond vert profond.
+// L'image se règle dans src/assets/heroes/<page>.webp (remplacer le fichier suffit).
+interface Props {
+  title: string;
+  eyebrow?: string;
+  image?: string;     // chemin sous src/assets/
+  position?: string;  // object-position, ex. "center 30%"
+}
+const { title, eyebrow, image, position = 'center' } = Astro.props;
+const bg = image ? img(image) : undefined;
+---
+<header class:list={['phero', { photo: bg }]}>
+  {bg && <Image src={bg} alt="" widths={[800, 1280, 1920, 2400]} sizes="100vw" loading="eager" fetchpriority="high" style={`object-position:${position}`} />}
+  <div class="wrap">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+  </div>
+</header>
+<style>
+  .phero {
+    position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center;
+    min-height: clamp(13rem, 30vw, 23rem); padding-block: 2.5rem;
+    background: linear-gradient(135deg, #123a1c, #011a09);
+  }
+  .phero :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .photo::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(8, 12, 8, .72), rgba(8, 12, 8, .28) 75%), rgba(8, 12, 8, .18); }
+  .wrap { width: min(100% - 2.5rem, var(--maxw)); }
+  h1 { color: #fff; margin: 0; font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: 1; text-shadow: 0 2px 18px rgba(0, 0, 0, .4); }
+  .eyebrow { color: #f1d98f; font-weight: 600; text-shadow: 0 1px 3px rgba(0, 0, 0, .9), 0 0 14px rgba(0, 0, 0, .7); margin-bottom: .75rem; }
+</style>

@@ -1,12 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import { site } from '../../data/site';
 const { address, social } = site;
 ---
 <Base title="Contact" description="Contactez la Distillerie Ampov à Phnom Penh : e-mail, adresse, visites.">
+  <PageHero title="Contact" image="heroes/contact.webp" position="center 30%" />
   <section class="section">
     <div class="wrap prose">
-      <h1>Contact</h1>
       <p>Une question, une demande de distribution ou d’importation, une visite ? Écrivez-nous.</p>
       <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
       <address>

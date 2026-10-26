@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import PostCard from '../../components/PostCard.astro';
 
 // Blog : du plus récent au plus ancien ; le plus récent est mis en avant.
@@ -8,10 +9,9 @@ const posts = (await getCollection('actualites')).sort((a, b) => b.data.date.get
 const [latest, ...older] = posts;
 ---
 <Base title="Actualités" description="Les dernières nouvelles, annonces et événements d’Ampov Distillery : dégustations, festivals, partenariats et vie de la distillerie.">
+  <PageHero title="Actualités" eyebrow="Le blog" image="heroes/actualites.webp" />
   <section class="section">
     <div class="wrap">
-      <p class="eyebrow">Le blog</p>
-      <h1>Actualités</h1>
       <p class="lead">Les dernières nouvelles d’Ampov : événements, dégustations, rencontres et vie de la distillerie.</p>
       {latest && <PostCard post={latest} featured />}
       {older.length > 0 && <div class="grid posts">{older.map((p) => <PostCard post={p} />)}</div>}
