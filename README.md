@@ -27,7 +27,7 @@ npm run preview
 
 ### Images « à déposer »
 
-Les pages cherchent chaque image par son chemin dans `src/assets/` (ex. `home/home-page-1.webp`). Une image absente est simplement omise ; dès qu'on dépose le fichier au bon endroit, avec le bon nom, elle apparaît au build suivant, optimisée (WebP, tailles responsives). La liste exacte des fichiers attendus est dans `source-content/MISSING-IMAGES.md`. Le logo se place en `src/assets/brand/logo.webp`.
+Les pages cherchent chaque image par son chemin dans `src/assets/` (ex. `home/home-page-1.webp`). Une image absente est simplement omise ; dès qu'on dépose le fichier au bon endroit, avec le bon nom, elle apparaît au build suivant, optimisée (WebP, tailles responsives). Le logo se place en `src/assets/brand/logo.webp`.
 
 ### URLs conservées
 
