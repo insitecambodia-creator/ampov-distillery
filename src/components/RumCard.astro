@@ -6,17 +6,31 @@ interface Props { rum: CollectionEntry<'gamme'> }
 const { rum } = Astro.props;
 const has = rum.data.image && img(rum.data.image);
 ---
-<a class="card" href={`/gamme/${rum.id}/`}>
+<a class="card rum" href={`/gamme/${rum.id}/`}>
   {has
     ? <div class="shot"><Pic path={rum.data.image!} alt={rum.data.name} widths={[300, 450, 600]} sizes="(min-width: 60rem) 16rem, 45vw" /></div>
     : <div class="ph" aria-hidden="true">{rum.data.name}</div>}
   <div class="body">
-    <p class="meta">{rum.data.type}</p>
+    <p class="type">{rum.data.type}</p>
     <h3>{rum.data.name}</h3>
   </div>
 </a>
 <style>
+  /* Carte blanche arrondie : bouteille entière au centre, type + nom centrés dessous */
+  .rum { background: #fff; border: 0; border-radius: 1rem; overflow: hidden; text-align: center;
+    box-shadow: 0 2px 14px rgba(70, 45, 10, .10); transition: transform .18s ease, box-shadow .18s ease; }
+  .rum:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(70, 45, 10, .18); }
   /* Bouteille entière, jamais rognée : cadre 3/4, image « contain », centrée */
-  .shot { aspect-ratio: 3 / 4; display: grid; place-items: center; padding: 1rem 1rem .5rem; }
+  .shot { aspect-ratio: 3 / 4; display: grid; place-items: center; padding: 1.5rem 1.5rem .5rem; }
   .shot :global(img) { width: auto; height: auto; max-width: 100%; max-height: 100%; aspect-ratio: auto; object-fit: contain; }
+  .rum .ph { border-radius: 0; }
+  .body { padding: .25rem 1.25rem 1.6rem; }
+  .type { margin: 0 0 .6rem; font: 600 1.15rem var(--display); letter-spacing: .02em; color: #a07020; }
+  h3 { margin: 0; font-size: 1.5rem; line-height: 1.15; }
+  @media (max-width: 40rem) {
+    .shot { padding: 1rem 1rem .25rem; }
+    .body { padding: .25rem .75rem 1.1rem; }
+    .type { font-size: 1rem; margin-bottom: .35rem; }
+    h3 { font-size: 1.15rem; }
+  }
 </style>

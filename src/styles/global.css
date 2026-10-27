@@ -108,3 +108,6 @@ form.stack .row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-f
 .status { color: var(--accent); }
 .prose h2 { margin-top: 2rem; }
 .prose h3 { margin-top: 1.5rem; }
+
+/* Cartes de rhums : deux par ligne sur téléphone (une carte pleine page serait trop haute) */
+@media (max-width: 40rem) { .grid.rums { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
