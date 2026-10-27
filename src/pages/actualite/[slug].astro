@@ -1,5 +1,8 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import Gallery from '../../components/Gallery.astro';
+import { getPosts } from '../../data/news';
+import { listImages } from '../../data/images';
 import Base from '../../layouts/Base.astro';
 import Pic from '../../components/Pic.astro';
 import PostCard from '../../components/PostCard.astro';
@@ -8,7 +11,7 @@ import { site } from '../../data/site';
 
 // Seuls les articles dont le corps Markdown est renseigné ont une page (URL WordPress conservée : /actualite/<slug>/).
 export async function getStaticPaths() {
-  const all = (await getCollection('actualites')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const all = await getPosts();
   const published = all.filter((a) => a.body?.trim());
   return published.map((entry, i) => ({
     params: { slug: entry.id },
@@ -18,6 +21,7 @@ export async function getStaticPaths() {
 const { entry, newer, older, others } = Astro.props;
 const { data } = entry;
 const { Content } = await render(entry);
+const photos = listImages(`actualites/${entry.id}`); // galerie : tout fichier déposé dans src/assets/actualites/<article>/
 const iso = data.date.toISOString().slice(0, 10);
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'BlogPosting', headline: data.title, datePublished: iso,
@@ -34,6 +38,7 @@ const jsonLd = {
       <h1>{data.title}</h1>
       {data.image && <div class="cover"><Pic path={data.image} alt="" widths={[640, 960, 1280]} sizes="(min-width: 50rem) 46rem, 100vw" loading="eager" /></div>}
       <div class="prose body"><Content /></div>
+      <Gallery paths={photos} alt={data.title} min="15rem" />
       {(newer || older) && (
         <nav class="pager" aria-label="Autres articles">
           {older ? <a href={older.body?.trim() ? `/actualite/${older.id}/` : '/actualites/'}><span>← Précédent</span>{older.data.title}</a> : <span></span>}

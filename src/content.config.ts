@@ -38,6 +38,7 @@ const actualites = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     excerpt: z.string().default(''),
+    draft: z.boolean().default(false), // true = masqué du blog (ni carte, ni page)
     image: z.string().optional(),
     order: z.number().default(100),
   }),

@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPosts } from '../../data/news';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import PostCard from '../../components/PostCard.astro';
 
 // Blog : du plus récent au plus ancien ; le plus récent est mis en avant.
-const posts = (await getCollection('actualites')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const posts = await getPosts();
 const [latest, ...older] = posts;
 ---
 <Base title="Actualités" description="Les dernières nouvelles, annonces et événements d’Ampov Distillery : dégustations, festivals, partenariats et vie de la distillerie.">
