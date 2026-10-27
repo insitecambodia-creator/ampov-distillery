@@ -1,12 +1,13 @@
 ---
 // Section large à deux colonnes : texte d'un côté, photos de l'autre (slot « media »).
-// Sans photos, le texte s'étale sur deux colonnes. `alt` = fond crème plus foncé, `reverse` = photos à gauche.
-interface Props { title?: string; level?: 2 | 3; eyebrow?: string; alt?: boolean; reverse?: boolean; id?: string }
-const { title, level = 2, eyebrow, alt = false, reverse = false, id } = Astro.props;
+// Sans photos, le texte s'étale sur deux colonnes. `alt` = fond crème plus foncé, `reverse` = photos à gauche,
+// `dark` = bandeau vert sombre (texte blanc / doré) pour casser le rythme — à n'utiliser qu'une fois par page.
+interface Props { title?: string; level?: 2 | 3; eyebrow?: string; alt?: boolean; dark?: boolean; reverse?: boolean; id?: string }
+const { title, level = 2, eyebrow, alt = false, dark = false, reverse = false, id } = Astro.props;
 const hasMedia = Astro.slots.has('media');
 const Heading = `h${level}` as 'h2' | 'h3';
 ---
-<section class:list={['feature', { alt, reverse, solo: !hasMedia }]} id={id}>
+<section class:list={['feature', { alt, dark, reverse, solo: !hasMedia }]} id={id}>
   <div class="wrap grid">
     <div class="text">
       {title && <Heading>{title}</Heading>}
@@ -19,6 +20,10 @@ const Heading = `h${level}` as 'h2' | 'h3';
 <style>
   .feature { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
   .feature.alt { background: var(--bg-alt); }
+  .feature.dark { background: #011a09; color: #fff; }
+  .dark .text :global(h2), .dark .text :global(h3), .dark .text :global(strong) { color: #fff; }
+  .dark .text :global(.eyebrow) { color: var(--accent-light); }
+  .dark .text :global(.ticks li::before) { color: var(--accent-light); }
   .grid { display: grid; gap: clamp(2rem, 5vw, 4.5rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
   .reverse .media { order: -1; }
   .text :global(h2) { margin-top: 0; }

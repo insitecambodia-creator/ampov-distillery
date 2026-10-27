@@ -10,3 +10,4 @@
 - Boutons : un seul système `.btn` (primaire / `ghost`, version `on-dark` sur fond sombre) — voir `src/styles/global.css`.
 - Thème clair (crème) ; les couleurs sont des variables en haut de `global.css`.
 - Le site reste en `noindex` tant que `PUBLIC_INDEXABLE=true` n'est pas défini sur le build de production.
+- Rythme des pages : on peut insérer **une seule** section sombre (vert `#011a09`, texte blanc/doré) au milieu d'une page pour casser la monotonie — `<Feature dark>` sur Savoir-faire et Terroir. Le bandeau « visite » du pied de page compte à part.
