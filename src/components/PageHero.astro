@@ -29,6 +29,6 @@ const bg = image ? img(image) : undefined;
   .phero :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
   .photo::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(8, 12, 8, .72), rgba(8, 12, 8, .28) 75%), rgba(8, 12, 8, .18); }
   .wrap { width: min(100% - 2.5rem, var(--maxw)); }
-  h1 { color: #fff; margin: 0; font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: 1; text-shadow: 0 2px 18px rgba(0, 0, 0, .4); }
+  h1 { color: #fff; margin: 0; font-size: calc(clamp(2.6rem, 8vw, 5.4rem) - 2px); line-height: 1; text-shadow: 0 2px 18px rgba(0, 0, 0, .4); }
   .eyebrow { color: #f1d98f; font-weight: 600; text-shadow: 0 1px 3px rgba(0, 0, 0, .9), 0 0 14px rgba(0, 0, 0, .7); margin-bottom: .75rem; }
 </style>
