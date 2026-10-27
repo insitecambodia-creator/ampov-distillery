@@ -1,0 +1,35 @@
+# Redirections 301 depuis l'ancien site WordPress (appliquées par Cloudflare avant le chargement de la page).
+
+# Sections devenues des blocs de pages plus grandes : on renvoie vers la page parente
+/savoir-faire/reception/ /savoir-faire/ 301
+/savoir-faire/reception /savoir-faire/ 301
+/savoir-faire/pressage/ /savoir-faire/ 301
+/savoir-faire/pressage /savoir-faire/ 301
+/savoir-faire/notre-melasse/ /savoir-faire/ 301
+/savoir-faire/notre-melasse /savoir-faire/ 301
+/savoir-faire/les-fermentations/ /savoir-faire/ 301
+/savoir-faire/les-fermentations /savoir-faire/ 301
+/terroir-canne/canne/ /terroir-canne/ 301
+/terroir-canne/canne /terroir-canne/ 301
+/terroir-canne/climat-sol/ /terroir-canne/ 301
+/terroir-canne/climat-sol /terroir-canne/ 301
+/terroir-canne/producteurs/ /terroir-canne/ 301
+/terroir-canne/producteurs /terroir-canne/ 301
+/terroir-canne/methode-de-culture/ /terroir-canne/ 301
+/terroir-canne/methode-de-culture /terroir-canne/ 301
+/terroir-canne/engagement-social/ /terroir-canne/ 301
+/terroir-canne/engagement-social /terroir-canne/ 301
+
+# Boutique en ligne WooCommerce : jamais ouverte au public (phase 2)
+/shop/ /nos-creations/ 301
+/shop /nos-creations/ 301
+/cart/ / 301
+/cart / 301
+/checkout/ / 301
+/checkout / 301
+/my-account/ / 301
+/my-account / 301
+
+# Page de démonstration WordPress
+/sample-page/ / 301
+/sample-page / 301
