@@ -32,7 +32,7 @@ const familles = [
 <style>
   .rhums { background: #011a09; color: #fff; padding-block: clamp(3rem, 8vw, 5.5rem); text-align: center; }
   header { border-bottom: 1px solid #3d4d40; padding-bottom: 1.25rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
-  h2 { color: #e6c971; font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: .15rem; }
+  h2 { color: #e6c971; font-size: calc(clamp(2.2rem, 5vw, 3.2rem) - 2px); margin-bottom: .15rem; }
   .sub { color: #8b968c; font-size: 1.1rem; margin: 0; }
   ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 2.25rem 1.5rem; }
   li { color: var(--c); flex: 1 1 9rem; max-width: 12rem; }
@@ -41,9 +41,9 @@ const familles = [
     background: linear-gradient(180deg, color-mix(in srgb, var(--c) 65%, #fff) 0%, var(--c) 55%, color-mix(in srgb, var(--c) 78%, #000) 100%);
     -webkit-mask: var(--bottle) center / contain no-repeat; mask: var(--bottle) center / contain no-repeat;
   }
-  h3 { color: inherit; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: .6rem; }
-  li p { margin: 0; font-size: .98rem; line-height: 1.5; }
-  @media (max-width: 30rem) { h3 { font-size: 1.45rem; } li p { font-size: .9rem; } }
+  h3 { color: inherit; font-size: calc(clamp(1.6rem, 3vw, 2rem) - 2px); margin-bottom: .6rem; }
+  li p { margin: 0; font-size: .9rem; line-height: 1.5; }
+  @media (max-width: 30rem) { h3 { font-size: calc(1.45rem - 2px); } li p { font-size: .9rem; } }
   .outro { max-width: 62rem; margin: clamp(2.5rem, 6vw, 4rem) auto 2rem; }
   p:has(> .btn) { justify-content: center; }
 </style>

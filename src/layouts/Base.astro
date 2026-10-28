@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import bodyFont from '../assets/fonts/barlow-latin-400-normal.woff2?url';
 import headingFont from '../assets/fonts/barlow-semi-condensed-latin-600-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -27,6 +28,7 @@ const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
     <meta name="description" content={description} />
     {!indexable && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

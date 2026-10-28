@@ -18,3 +18,9 @@ export function imgs(paths: string[]) {
     return src ? [{ path, src }] : [];
   });
 }
+
+// Toutes les images d'un dossier de src/assets/ (triées par nom) : une galerie se remplit en y déposant des fichiers.
+export function listImages(dir: string): string[] {
+  const prefix = `../assets/${dir}/`;
+  return Object.keys(modules).filter((k) => k.startsWith(prefix) && !k.slice(prefix.length).includes('/')).sort().map((k) => k.slice('../assets/'.length));
+}

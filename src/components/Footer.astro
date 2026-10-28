@@ -32,7 +32,7 @@ const year = new Date().getFullYear();
 </footer>
 <style>
   .visit { background: #011a09; padding-block: 3rem; text-align: center; }
-  .visit h2 { color: #e6c971; font-size: clamp(1.4rem, 3vw, 2rem); max-width: 40rem; margin-inline: auto; }
+  .visit h2 { color: #e6c971; font-size: calc(clamp(1.4rem, 3vw, 2rem) - 2px); max-width: 40rem; margin-inline: auto; }
   .visit p:has(> .btn) { justify-content: center; margin: 0; }
   .ftr { background: var(--bg-alt); padding-block: 2.5rem 1.5rem; font-size: .95rem; }
   .cols { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }

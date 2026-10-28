@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Pic from '../components/Pic.astro';
+import Feature from '../components/Feature.astro';
 import Gallery from '../components/Gallery.astro';
 const stades = [
   { t: 'Plantation de la canne', d: 'Une bouture environ tous les 10 cm.', p: 'terroir/plante-1m2.webp' },
@@ -12,70 +13,80 @@ const stades = [
 ---
 <Base title="Terroir & Canne" description="Climat tropical, sols riches, tradition agricole ancienne : le Cambodge offre des conditions parfaites pour une canne aromatique et puissante.">
   <PageHero title="Terroir & Canne" image="heroes/terroir.webp" position="center 55%" />
-  <section class="section">
-    <div class="wrap prose">
-      <h2>Le Cambodge : un terroir idéal pour la canne</h2>
-      <p>Climat tropical, sols riches, tradition agricole ancienne : le Cambodge offre des conditions parfaites pour une canne aromatique et puissante.</p>
-      <p>Au cœur du terroir d’un rhum comme Ampov, il y a la canne, qui n’est pas qu’une matière première : elle est le reflet du climat et du sol où elle pousse.</p>
-      <Gallery paths={['terroir/ideal-1.webp', 'terroir/ideal-2.webp', 'terroir/plante-4mois-1.webp', 'terroir/plante-5mois-2.webp']} alt="Champs de canne à sucre au Cambodge" />
-
-      <h2>Climat & sol</h2>
+  <Feature title="Le Cambodge : un terroir idéal pour la canne">
+    <p>Climat tropical, sols riches, tradition agricole ancienne : le Cambodge offre des conditions parfaites pour une canne aromatique et puissante.</p>
+    <p>Au cœur du terroir d’un rhum comme Ampov, il y a la canne, qui n’est pas qu’une matière première : elle est le reflet du climat et du sol où elle pousse.</p>
+    <Fragment slot="media">
+      <Gallery paths={['terroir/ideal-1.webp', 'terroir/ideal-2.webp', 'terroir/plante-4mois-1.webp', 'terroir/plante-5mois-2.webp']} alt="Champs de canne à sucre au Cambodge" min="13rem" />
+    </Fragment>
+  </Feature>
+  <Feature title="Climat & sol" alt reverse>
+    <p>Le climat est tropical et humide, avec une chaleur constante toute l’année, une saison des pluies et une saison sèche marquées. Cette alternance favorise le sucre et les arômes.</p>
+    <p>Pour notre canne : croissance rapide, jus très aromatique et très sucré, forte expression végétale et fruitée dans le rhum. Les cannes sont cultivées à proximité d’une rivière, dans une région naturellement riche en eau, en nutriments et en matière organique.</p>
+    <p>Le sol est la « signature gustative » de la canne. Conséquence pour notre rhum : un profil aromatique plus intense et pur, une expression nette de la canne fraîche, des notes végétales, fruitées, voire légèrement salines.</p>
+    <Fragment slot="media">
       <Pic path="terroir/climat-sol.webp" alt="Climat au Cambodge" />
-      <p>Le climat est tropical et humide, avec une chaleur constante toute l’année, une saison des pluies et une saison sèche marquées. Cette alternance favorise le sucre et les arômes.</p>
-      <p>Pour notre canne : croissance rapide, jus très aromatique et très sucré, forte expression végétale et fruitée dans le rhum. Les cannes sont cultivées à proximité d’une rivière, dans une région naturellement riche en eau, en nutriments et en matière organique.</p>
-      <p>Le sol est la « signature gustative » de la canne. Conséquence pour notre rhum : un profil aromatique plus intense et pur, une expression nette de la canne fraîche, des notes végétales, fruitées, voire légèrement salines.</p>
-
-      <h2>Des producteurs engagés</h2>
-      <Gallery paths={['terroir/Ampov-team-canne.webp', 'terroir/manincanne.webp']} alt="Producteurs de canne à sucre" min="18rem" />
-      <p>Au cœur des plaines fertiles situées à l’est de Phnom Penh, nos producteurs Yeap & Sophra cultivent la canne à sucre sur une petite exploitation familiale d’environ 10 hectares. Leur terre, transmise de génération en génération, est travaillée avec patience, respect et une connaissance intime du climat cambodgien.</p>
-      <p>Chaque tige de canne est coupée à la main, sélectionnée pour sa fraîcheur et son taux de sucre naturel. Ce travail minutieux permet d’obtenir une matière première d’une qualité exceptionnelle, idéale pour notre production artisanale.</p>
-      <p>Sur leur exploitation, 1 tonne de canne fraîche permet de réaliser 80 batchs (fagots) de 12 kg chacun. Ce format traditionnel facilite le transport, la manipulation et garantit que chaque lot reste homogène, traçable et parfaitement adapté à nos exigences de transformation.</p>
-      <p>Cette approche simple, efficace et profondément ancrée dans les pratiques rurales cambodgiennes nous permet de préserver l’authenticité du produit tout en soutenant un modèle agricole durable.</p>
-      <h3>Une collaboration fondée sur la confiance</h3>
-      <p>Yeap & Sophra ne sont pas seulement nos producteurs : ils sont les gardiens d’un savoir-faire local que nous sommes fiers de valoriser. En travaillant main dans la main, nous soutenons une agriculture responsable, respectueuse des hommes et de la terre, et nous assurons une qualité constante du champ jusqu’à la bouteille.</p>
-
-      <h2>Notre canne à sucre, une histoire de terroir et de savoir-faire</h2>
-      <h3>La canne : notre véritable ADN</h3>
-      <Gallery paths={['terroir/plante.webp', 'terroir/plante2.webp']} alt="Plant de canne à sucre" />
-    </div>
-    <div class="wrap">
-      <div class="cols-3">
+    </Fragment>
+  </Feature>
+  <Feature title="Des producteurs engagés" dark>
+    <p>Au cœur des plaines fertiles situées à l’est de Phnom Penh, nos producteurs Yeap & Sophra cultivent la canne à sucre sur une petite exploitation familiale d’environ 10 hectares. Leur terre, transmise de génération en génération, est travaillée avec patience, respect et une connaissance intime du climat cambodgien.</p>
+    <p>Chaque tige de canne est coupée à la main, sélectionnée pour sa fraîcheur et son taux de sucre naturel. Ce travail minutieux permet d’obtenir une matière première d’une qualité exceptionnelle, idéale pour notre production artisanale.</p>
+    <p>Sur leur exploitation, 1 tonne de canne fraîche permet de réaliser 80 batchs (fagots) de 12 kg chacun. Ce format traditionnel facilite le transport, la manipulation et garantit que chaque lot reste homogène, traçable et parfaitement adapté à nos exigences de transformation.</p>
+    <p>Cette approche simple, efficace et profondément ancrée dans les pratiques rurales cambodgiennes nous permet de préserver l’authenticité du produit tout en soutenant un modèle agricole durable.</p>
+    <h3>Une collaboration fondée sur la confiance</h3>
+    <p>Yeap & Sophra ne sont pas seulement nos producteurs : ils sont les gardiens d’un savoir-faire local que nous sommes fiers de valoriser. En travaillant main dans la main, nous soutenons une agriculture responsable, respectueuse des hommes et de la terre, et nous assurons une qualité constante du champ jusqu’à la bouteille.</p>
+    <Fragment slot="media">
+      <Gallery paths={['terroir/Ampov-team-canne.webp', 'terroir/manincanne.webp']} alt="Producteurs de canne à sucre" min="14rem" />
+    </Fragment>
+  </Feature>
+  <Feature title="Notre canne à sucre, une histoire de terroir et de savoir-faire" alt reverse>
+    <h3>La canne : notre véritable ADN</h3>
+    <Fragment slot="media">
+      <Gallery paths={['terroir/plante.webp', 'terroir/plante2.webp']} alt="Plant de canne à sucre" min="12rem" />
+    </Fragment>
+  </Feature>
+  <Feature title="Méthode de culture">
+    <ul class="ticks">
+      <li>Préparation du sol : labour profond, affinage, drainage, contrôle du pH. Sélection et préparation des boutures : tiges de 8 à 10 cm.</li>
+      <li>Plantation par la méthode des boutures couchées dans un sillon, avant la saison des pluies (avril, mai).</li>
+      <li>Irrigation.</li>
+      <li>Croissance et maturité : 10 à 14 mois. La canne cambodgienne atteint souvent des taux de Brix élevés grâce à la forte insolation.</li>
+      <li>Récolte le matin : canne fraîche = meilleure qualité du jus.</li>
+    </ul>
+    <Fragment slot="media">
+      <div class="stades">
         {stades.map((s) => (
-          <div class="tile">
-            <Pic path={s.p} alt={s.t} widths={[320, 480]} sizes="(min-width: 60rem) 20rem, 90vw" />
-            <h3 style="margin-top:.75rem">{s.t}</h3>
-            {s.d && <p>{s.d}</p>}
-          </div>
+          <figure class="stade">
+            <Pic path={s.p} alt={s.t} widths={[320, 480]} sizes="(min-width: 60rem) 14rem, 45vw" />
+            <figcaption><strong>{s.t}</strong>{s.d && <span>{s.d}</span>}</figcaption>
+          </figure>
         ))}
       </div>
-    </div>
-    <div class="wrap prose">
-      <h2>Méthode de culture</h2>
-      <ul class="ticks">
-        <li>Préparation du sol : labour profond, affinage, drainage, contrôle du pH. Sélection et préparation des boutures : tiges de 8 à 10 cm.</li>
-        <li>Plantation par la méthode des boutures couchées dans un sillon, avant la saison des pluies (avril, mai).</li>
-        <li>Irrigation.</li>
-        <li>Croissance et maturité : 10 à 14 mois. La canne cambodgienne atteint souvent des taux de Brix élevés grâce à la forte insolation.</li>
-        <li>Récolte le matin : canne fraîche = meilleure qualité du jus.</li>
-      </ul>
-
-      <h2>Engagement social</h2>
-      <p>Ampov naît des champs, auprès des femmes et des hommes qui cultivent la canne. Nous travaillons exclusivement avec de petits producteurs, sur des parcelles familiales. Notre engagement social repose sur :</p>
-      <ul class="ticks">
-        <li>le soutien et le respect des producteurs,</li>
-        <li>la valorisation du travail local,</li>
-        <li>la reconnaissance internationale du terroir cambodgien au travers de produits premium,</li>
-        <li>l’éthique et la transparence.</li>
-      </ul>
-      <p>Nous croyons qu’un grand rhum commence par une relation équitable. Nous défendons une agriculture durable et circulaire :</p>
-      <ul class="ticks">
-        <li>la bagasse devient un combustible,</li>
-        <li>la vinasse est transformée en fertilisant naturel,</li>
-        <li>les intrants chimiques sont réduits au minimum,</li>
-        <li>les variétés de canne anciennes sont préservées.</li>
-      </ul>
-      <p>Célébrer le patrimoine cambodgien : chaque bouteille raconte un terroir, une culture, une histoire. Ampov met en lumière la canne locale, les gestes traditionnels de coupe, la richesse agricole du Cambodge.</p>
-      <p><strong>Notre promesse : créer un rhum qui respecte la terre, honore les producteurs et valorise le Cambodge. Un rhum qui a du sens, autant que du goût.</strong></p>
-    </div>
-  </section>
+    </Fragment>
+  </Feature>
+  <Feature title="Engagement social" alt deco="canne">
+    <p>Ampov naît des champs, auprès des femmes et des hommes qui cultivent la canne. Nous travaillons exclusivement avec de petits producteurs, sur des parcelles familiales. Notre engagement social repose sur :</p>
+    <ul class="ticks">
+      <li>le soutien et le respect des producteurs,</li>
+      <li>la valorisation du travail local,</li>
+      <li>la reconnaissance internationale du terroir cambodgien au travers de produits premium,</li>
+      <li>l’éthique et la transparence.</li>
+    </ul>
+    <p>Nous croyons qu’un grand rhum commence par une relation équitable. Nous défendons une agriculture durable et circulaire :</p>
+    <ul class="ticks">
+      <li>la bagasse devient un combustible,</li>
+      <li>la vinasse est transformée en fertilisant naturel,</li>
+      <li>les intrants chimiques sont réduits au minimum,</li>
+      <li>les variétés de canne anciennes sont préservées.</li>
+    </ul>
+    <p>Célébrer le patrimoine cambodgien : chaque bouteille raconte un terroir, une culture, une histoire. Ampov met en lumière la canne locale, les gestes traditionnels de coupe, la richesse agricole du Cambodge.</p>
+    <p><strong>Notre promesse : créer un rhum qui respecte la terre, honore les producteurs et valorise le Cambodge. Un rhum qui a du sens, autant que du goût.</strong></p>
+  </Feature>
 </Base>
+<style>
+  .stades { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem 1rem; }
+  .stade { margin: 0; }
+  .stade :global(img) { aspect-ratio: 1; object-fit: cover; }
+  .stade figcaption { display: grid; gap: .15rem; margin-top: .5rem; font-size: .9rem; line-height: 1.4; }
+  .stade figcaption strong { font-family: var(--display); font-size: 1.1rem; }
+</style>

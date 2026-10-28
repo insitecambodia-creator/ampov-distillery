@@ -10,6 +10,14 @@ const collection = all.filter((r) => r.data.range === 'collection');
 ---
 <Base title="Nos Créations" description="Ampov est créateur de rhums purs, uniques et rares (Single Cask, Brut de fût, Édition Limitée, High Ester…) en mariant la technologie de la fermentation et de la distillation française au terroir cambodgien.">
   <PageHero title="Nos créations" eyebrow="Héritage & Authenticité" image="heroes/nos-creations.webp" />
+  <section class="section alt">
+    <div class="wrap">
+      <h2>La gamme permanente</h2>
+      <div class="grid rums">{permanente.map((r) => <RumCard rum={r} />)}</div>
+      <h2 class="next">La gamme collection</h2>
+      <div class="grid rums">{collection.map((r) => <RumCard rum={r} />)}</div>
+    </div>
+  </section>
   <section class="section">
     <div class="wrap">
       <div class="prose">
@@ -23,16 +31,7 @@ const collection = all.filter((r) => r.data.range === 'collection');
       </div>
     </div>
   </section>
-  <section class="section alt">
-    <div class="wrap">
-      <h2>La gamme permanente</h2>
-      <div class="grid">{permanente.map((r) => <RumCard rum={r} />)}</div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="wrap">
-      <h2>La gamme collection</h2>
-      <div class="grid">{collection.map((r) => <RumCard rum={r} />)}</div>
-    </div>
-  </section>
 </Base>
+<style>
+  .next { margin-top: clamp(2.5rem, 6vw, 4rem); }
+</style>
