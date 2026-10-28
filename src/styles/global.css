@@ -122,6 +122,17 @@ form.stack input[type=range] { padding: 0; accent-color: var(--accent); }
 form.stack .row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
 .hp { position: absolute; left: -9999px; }
 .status { color: var(--accent); }
+.status.err { color: #9b2c2c; }
+form.stack [hidden] { display: none; }
+form.stack fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: .3rem; }
+form.stack legend { padding: 0; margin-bottom: .3rem; font-size: .95rem; color: var(--muted); }
+form.stack .pills { display: flex; flex-wrap: wrap; gap: .6rem; }
+form.stack .pill { position: relative; display: block; }
+form.stack .pill input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+form.stack .pill span { display: block; padding: .6rem 1rem; background: #fff; color: var(--text); border: 1px solid var(--line); }
+form.stack .pill input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+form.stack .pill input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+form.stack .hint { font-size: .85rem; color: var(--muted); margin: 0; }
 .prose h2 { margin-top: 2rem; }
 .prose h3 { margin-top: 1.5rem; }
 

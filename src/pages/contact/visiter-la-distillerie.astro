@@ -4,9 +4,9 @@ import PageHero from '../../components/PageHero.astro';
 import Gallery from '../../components/Gallery.astro';
 import { site } from '../../data/site';
 
-// Endpoint du formulaire (Formspree, Web3Forms, Getform…) : voir .env.example.
-// Sans endpoint, le formulaire ouvre le client mail du visiteur (mailto).
-const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+// Même webhook n8n (→ Google Sheet « Ampov Visits ») que la page rum.ampov-distillery.com, mêmes noms de champs.
+// `PUBLIC_FORM_ENDPOINT` permet de le remplacer (ex. webhook de test) : voir .env.example.
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || 'https://n8n.srv873866.hstgr.cloud/webhook/ampov-visit-booking';
 ---
 <Base title="Visiter la distillerie" description="À Phnom Penh : visite guidée de la distillerie Ampov, 5 $ par personne (déduit si achat de rhums), sur réservation uniquement.">
   <PageHero title="Visiter la distillerie" image="heroes/visiter.webp" />
@@ -17,23 +17,42 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
       <p><strong>Adresse :</strong> {site.address.visit}</p>
 
       <h2>Demande de visite</h2>
-      <form class="stack" id="visit-form" method="post" action={endpoint || undefined} data-email={site.email}>
-        <div class="row">
-          <label>Prénom *<input name="prenom" required autocomplete="given-name" /></label>
-          <label>Nom *<input name="nom" required autocomplete="family-name" /></label>
-        </div>
+      <form class="stack" id="visit-form" data-endpoint={endpoint} data-email={site.email}>
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <label>Nom complet *<input name="full_name" required autocomplete="name" /></label>
+        <label>Nationalité *<input name="nationality" required autocomplete="country-name" /></label>
         <label>Email *<input type="email" name="email" required autocomplete="email" /></label>
-        <label>Téléphone / Telegram<input type="tel" name="telephone" autocomplete="tel" /></label>
-        <label>Nombre de personnes : <output id="pax-out">4</output>
-          <input type="range" name="personnes" min="2" max="10" step="1" value="4" id="pax" />
+        <label>Téléphone (WhatsApp de préférence) *<input type="tel" name="phone" required autocomplete="tel" /></label>
+        <label>Date souhaitée *<input type="date" name="visit_date" id="visit-date" required /></label>
+        <fieldset>
+          <legend>Heure souhaitée *</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="time_slot" value="10:00" required /><span>10 h</span></label>
+            <label class="pill"><input type="radio" name="time_slot" value="15:00" /><span>15 h</span></label>
+          </div>
+          <p class="hint">Vu le temps de trajet jusqu’à la distillerie, les visites ont lieu uniquement à 10 h et à 15 h.</p>
+        </fieldset>
+        <label>Nombre de personnes *<input type="number" name="guests" min="1" max="15" step="1" required inputmode="numeric" />
+          <span class="hint">Groupes de plus de 15 personnes : écrivez-nous directement.</span>
         </label>
-        <div class="row">
-          <label>Date<input type="date" name="date" required /></label>
-          <label>Heure (9 h – 18 h)<input type="time" name="heure" min="09:00" max="18:00" step="900" required /></label>
-        </div>
-        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <p><button class="btn" type="submit">Envoyer la demande</button></p>
-        <p class="status" id="visit-status" role="status"></p>
+        <label>Des enfants dans le groupe ? *
+          <select name="has_children" id="has-children" required>
+            <option value="" disabled selected>Sélectionner</option>
+            <option value="no">Non</option>
+            <option value="yes">Oui</option>
+          </select>
+        </label>
+        <label id="children-count-field" hidden>Nombre d’enfants<input type="number" name="children_count" id="children-count" min="1" max="15" step="1" inputmode="numeric" /></label>
+        <fieldset>
+          <legend>Arrivée *</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="transport" value="minivan" required /><span>Ensemble, en minivan</span></label>
+            <label class="pill"><input type="radio" name="transport" value="individually" /><span>Individuellement</span></label>
+          </div>
+        </fieldset>
+        <label>Notes (facultatif — régime alimentaire, accessibilité, demandes particulières)<textarea name="notes" rows="4"></textarea></label>
+        <p><button class="btn" type="submit" id="visit-submit">Envoyer la demande</button></p>
+        <p class="status" id="visit-status" role="status" aria-live="polite"></p>
       </form>
 
       <h3>Quelques-unes de nos dernières visites</h3>
@@ -45,30 +64,42 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 </Base>
 <script>
   const form = document.getElementById('visit-form') as HTMLFormElement;
-  const pax = document.getElementById('pax') as HTMLInputElement;
-  const out = document.getElementById('pax-out')!;
   const status = document.getElementById('visit-status')!;
-  pax.addEventListener('input', () => (out.textContent = pax.value));
+  const submit = document.getElementById('visit-submit') as HTMLButtonElement;
+  const hasChildren = document.getElementById('has-children') as HTMLSelectElement;
+  const childrenField = document.getElementById('children-count-field')!;
+  const childrenCount = document.getElementById('children-count') as HTMLInputElement;
+
+  (document.getElementById('visit-date') as HTMLInputElement).min = new Date().toISOString().split('T')[0];
+
+  hasChildren.addEventListener('change', () => {
+    const show = hasChildren.value === 'yes';
+    childrenField.hidden = !show;
+    childrenCount.required = show;
+    if (!show) childrenCount.value = '';
+  });
 
   form.addEventListener('submit', async (e) => {
-    const data = new FormData(form);
-    if (data.get('website')) { e.preventDefault(); return; } // honeypot
-    if (!form.getAttribute('action')) {
-      // Pas d'endpoint configuré : repli sur le client mail.
-      e.preventDefault();
-      const body = [...data.entries()].filter(([k]) => k !== 'website').map(([k, v]) => `${k} : ${v}`).join('\n');
-      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent('Demande de visite')}&body=${encodeURIComponent(body)}`;
-      return;
-    }
     e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (data._honey) return; // piège à robots : on abandonne en silence
+    delete data._honey;
+    data.submitted_at = new Date().toISOString();
+
+    submit.disabled = true;
+    status.className = 'status';
     status.textContent = 'Envoi en cours…';
     try {
-      const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const res = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       if (!res.ok) throw new Error(String(res.status));
       form.reset();
-      status.textContent = 'Merci ! Votre demande a bien été envoyée, nous revenons vers vous rapidement.';
+      childrenField.hidden = true;
+      status.textContent = 'Merci ! Votre demande de visite a bien été envoyée, nous vous confirmons le créneau par e-mail rapidement.';
     } catch {
+      status.className = 'status err';
       status.textContent = `L’envoi a échoué. Écrivez-nous à ${form.dataset.email}.`;
+    } finally {
+      submit.disabled = false;
     }
   });
 </script>
