@@ -1,13 +1,14 @@
 ---
+import { decoStyle, type Deco } from '../data/deco';
 // Section large à deux colonnes : texte d'un côté, photos de l'autre (slot « media »).
 // Sans photos, le texte s'étale sur deux colonnes. `alt` = fond crème plus foncé, `reverse` = photos à gauche,
 // `dark` = bandeau vert sombre (texte blanc / doré) pour casser le rythme — à n'utiliser qu'une fois par page.
-interface Props { title?: string; level?: 2 | 3; eyebrow?: string; alt?: boolean; dark?: boolean; reverse?: boolean; id?: string }
-const { title, level = 2, eyebrow, alt = false, dark = false, reverse = false, id } = Astro.props;
+interface Props { title?: string; level?: 2 | 3; eyebrow?: string; alt?: boolean; dark?: boolean; reverse?: boolean; id?: string; deco?: Deco; decoLeft?: boolean }
+const { title, level = 2, eyebrow, alt = false, dark = false, reverse = false, id, deco, decoLeft = false } = Astro.props;
 const hasMedia = Astro.slots.has('media');
 const Heading = `h${level}` as 'h2' | 'h3';
 ---
-<section class:list={['feature', { alt, dark, reverse, solo: !hasMedia }]} id={id}>
+<section class:list={['feature', { alt, dark, reverse, solo: !hasMedia, 'has-deco': deco, 'deco-left': deco && decoLeft }]} id={id} style={deco ? decoStyle(deco) : undefined}>
   <div class="wrap grid">
     <div class="text">
       {title && <Heading>{title}</Heading>}

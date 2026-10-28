@@ -47,6 +47,17 @@ p { margin: 0 0 1em; }
 .wrap { width: min(100% - 2.5rem, var(--maxw)); margin-inline: auto; }
 .section { padding-block: clamp(3rem, 8vw, 6rem); }
 .section.alt { background: var(--bg-alt); }
+
+/* Dessin au trait en filigrane (canne, bouteille) : `--deco` = url(svg), posé inline sur la section.
+   Teinte l'accent à ~7 % derrière le texte ; jamais sur fond sombre. `.deco-left` le passe à gauche. */
+.has-deco { position: relative; overflow: hidden; isolation: isolate; }
+.has-deco::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  height: min(30rem, 92%); max-width: 70vw; aspect-ratio: 1; top: 50%; right: 3%; translate: 0 -50%;
+  background: var(--accent); opacity: .07;
+  -webkit-mask: var(--deco) center / contain no-repeat; mask: var(--deco) center / contain no-repeat;
+}
+.has-deco.deco-left::before { right: auto; left: 3%; }
 .eyebrow { text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; color: var(--accent); margin-bottom: 1rem; }
 .lead { font-size: 1.075rem; color: var(--muted); max-width: 42rem; }
 .btn {

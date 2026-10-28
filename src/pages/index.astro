@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { decoStyle } from '../data/deco';
 import Pic from '../components/Pic.astro';
 import NosRhums from '../components/NosRhums.astro';
 import { Image } from 'astro:assets';
@@ -42,7 +43,7 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="section">
+  <section class="section has-deco" style={decoStyle('canne')}>
     <div class="wrap prose">
       <p class="eyebrow">Un rhum né du terroir cambodgien</p>
       <h2>Ampov est un rhum qui raconte une terre, un climat, une culture.</h2>
@@ -70,7 +71,7 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="section alt">
+  <section class="section alt has-deco" style={decoStyle('bouteille')}>
     <div class="wrap prose">
       <h2>Où déguster Ampov</h2>
       <p>Présent dans les plus beaux hôtels, restaurants et bars du Cambodge, mais également chez des cavistes spécialisés ou des restaurants en France et en Europe. Ampov est également présent au Japon.</p>
