@@ -35,7 +35,7 @@ Les URLs WordPress sont reprises à l'identique (`/savoir-faire/`, `/terroir-can
 
 ### Formulaire de visite
 
-Copier `.env.example` en `.env` et renseigner `PUBLIC_FORM_ENDPOINT` (Formspree, Web3Forms, Getform…). Sans endpoint, le bouton ouvre le client mail du visiteur vers `contact@ampov-distillery.com`.
+Le formulaire envoie ses champs en JSON au webhook n8n de production (`ampov-visit-booking`), qui ajoute une ligne au Google Sheet « Ampov Visits » — c'est le même webhook et les mêmes noms de champs que la page `rum.ampov-distillery.com` (`full_name`, `nationality`, `email`, `phone`, `visit_date`, `time_slot`, `guests`, `has_children`, `children_count`, `transport`, `notes`, `submitted_at`). Dans n8n, le nœud Webhook doit autoriser l'origine `https://ampov-distillery.com` (option « Allowed Origins (CORS) »). Pour utiliser un autre webhook (test), définir `PUBLIC_FORM_ENDPOINT`.
 
 ### Contrôle d'âge
 
